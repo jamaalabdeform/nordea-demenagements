@@ -78,15 +78,15 @@ export function SimulatorTeaser() {
 
         <Reveal delay={0.15} className="lg:col-span-7">
           <div className="rounded-[var(--radius-xl)] bg-paper/[0.04] p-6 shadow-[inset_0_0_0_1px_rgb(251_249_244/0.08)] sm:p-10">
-            <div className="flex items-end justify-between gap-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
               <div>
                 <p className="eyebrow text-paper/55">Ordre de grandeur · {h.label}</p>
-                <p className="font-display num mt-3 text-5xl text-paper [font-weight:300]" aria-live="polite">
+                <p className="font-display num mt-3 whitespace-nowrap text-5xl text-paper [font-weight:300]" aria-live="polite">
                   {lo}–{hi}
                   <span className="ml-2 text-2xl text-paper/60">m³</span>
                 </p>
               </div>
-              <p className="max-w-[12rem] text-right text-xs text-paper/50">{h.detail}. Votre inventaire donnera le chiffre exact.</p>
+              <p className="max-w-[14rem] text-xs text-paper/50 sm:text-right">{h.detail}. Votre inventaire donnera le chiffre exact.</p>
             </div>
             <IsoCargo filled={filledCells(mid, vehicle)} tone="dark" className="mx-auto mt-8 aspect-[16/10] w-full max-w-[36rem]" />
             <p className="mt-6 text-center text-xs text-paper/45">Représentation indicative du chargement · {vehicle.label}</p>

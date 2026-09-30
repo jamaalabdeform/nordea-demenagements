@@ -102,7 +102,7 @@ export default function CargoScene({ filled }: { filled: number }) {
     <Canvas
       orthographic
       dpr={[1, 1.75]}
-      shadows
+      shadows={{ type: THREE.PCFShadowMap }}
       camera={{ position: [4.5, 6, 11], zoom: 30, near: 0.1, far: 100 }}
       gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
       onCreated={({ camera }) => camera.lookAt(0, 1, 0)}

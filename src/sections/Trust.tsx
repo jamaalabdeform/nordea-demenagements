@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const principles = [
   { word: "Clarté", text: "Un devis écrit, poste par poste. Ce qui est inclus est écrit, ce qui ne l'est pas aussi." },
   { word: "Protection", text: "Couvertures, housses, emballage adapté aux objets fragiles, sanglage dans le camion." },
-  { word: "Ponctualité", text: "Une heure d'arrivée annoncée la veille, et un appel si quoi que ce soit change." },
+  { word: "Ponctualité", text: "Un créneau d'arrivée confirmé la veille, et un appel si quoi que ce soit change." },
   { word: "Accompagnement", text: "Un conseiller suit votre dossier, de la première question jusqu'à la livraison." },
   { word: "Transparence", text: "Les contraintes d'accès sont identifiées avant le devis, pas découvertes le jour J." },
 ];

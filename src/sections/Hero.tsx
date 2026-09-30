@@ -18,7 +18,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 id="hero-title" className="font-display mt-7 text-5xl text-ink [font-weight:360]">
+            <h1 id="hero-title" className="font-display mt-7 text-[clamp(2.75rem,1.6rem+2.9vw,4.25rem)] leading-[0.98] text-ink [font-weight:360]">
               Un déménagement sans mauvaises <em className="text-forest-700 [font-weight:340]">surprises.</em>
             </h1>
           </Reveal>
@@ -52,7 +52,7 @@ export function Hero() {
             />
             <figcaption className="mt-4 flex items-baseline justify-between gap-4 px-1 text-xs text-stone-600">
               <span>Protection du mobilier avant chargement</span>
-              <span className="num">50°37′ N — 3°03′ E</span>
+              <span className="num hidden sm:inline">50°37′ N — 3°03′ E</span>
             </figcaption>
           </figure>
         </Reveal>

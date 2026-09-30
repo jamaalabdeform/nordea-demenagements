@@ -29,7 +29,7 @@ const stages = [
   },
   {
     title: "Validation avant devis",
-    text: "Le devis n'est établi qu'une fois ces points vérifiés avec vous. Le prix annoncé est le prix payé.",
+    text: "Le devis n'est établi qu'une fois ces points vérifiés avec vous. Ce qui est écrit est ce qui est prévu.",
     file: "Devis · prêt à être envoyé",
   },
 ];

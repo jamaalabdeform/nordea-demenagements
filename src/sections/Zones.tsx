@@ -75,7 +75,14 @@ function RegionMap() {
             <g key={l.slug}>
               <circle cx={l.map.x} cy={l.map.y} r={main ? 1.6 : 0.9} fill={main ? "#cf7a55" : "rgba(251,249,244,.85)"} />
               {main && <circle cx={l.map.x} cy={l.map.y} r="3.4" fill="none" stroke="#cf7a55" strokeWidth="0.3" opacity=".6" />}
-              <text x={l.map.x + (main ? 3.2 : 2)} y={l.map.y + 1} fill={main ? "#fbf9f4" : "rgba(251,249,244,.7)"} fontSize={main ? 3.4 : 2.6} fontWeight={main ? 600 : 400}>
+              <text
+                x={l.map.x > 70 ? l.map.x - 2 : l.map.x + (main ? 3.2 : 2)}
+                y={l.map.y + 1}
+                textAnchor={l.map.x > 70 ? "end" : "start"}
+                fill={main ? "#fbf9f4" : "rgba(251,249,244,.7)"}
+                fontSize={main ? 3.4 : 2.6}
+                fontWeight={main ? 600 : 400}
+              >
                 {l.name}
               </text>
             </g>

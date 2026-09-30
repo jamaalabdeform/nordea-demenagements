@@ -72,9 +72,11 @@ export function Header() {
             <Phone className="size-4 text-forest-500" strokeWidth={1.6} aria-hidden />
             <span className="num">{company.phone.display}</span>
           </a>
-          <ButtonLink href={routes.quote} size="sm" className="hidden sm:inline-flex" onClick={() => track("cta_click", { location: "header" })}>
-            {site.cta.primary}
-          </ButtonLink>
+          <span className="hidden sm:block">
+            <ButtonLink href={routes.quote} size="sm" onClick={() => track("cta_click", { location: "header" })}>
+              {site.cta.primary}
+            </ButtonLink>
+          </span>
           <button
             type="button"
             className="relative -mr-2 grid size-11 place-items-center rounded-full lg:hidden"

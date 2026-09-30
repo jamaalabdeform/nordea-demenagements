@@ -14,7 +14,7 @@ const points = [
 export function Reassurance() {
   return (
     <section aria-label="Nos engagements" className="border-y border-ink/8 bg-paper">
-      <ul className="container-page grid grid-cols-1 gap-px bg-ink/8 px-0 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mx-auto grid max-w-[var(--container-page)] grid-cols-1 gap-px bg-ink/8 sm:grid-cols-2 lg:grid-cols-4">
         {points.map((p, i) => (
           <Reveal as="li" key={p.title} delay={i * 0.05} className="bg-paper px-[var(--spacing-gutter)] py-7 sm:py-9 lg:px-8">
             <p className="text-[0.9375rem] font-semibold text-ink">{p.title}</p>

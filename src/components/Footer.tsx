@@ -70,7 +70,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container-page flex flex-col gap-4 border-t border-paper/10 py-7 text-xs text-paper/50 md:flex-row md:items-center md:justify-between">
+      <div className="container-page">
+      <div className="flex flex-col gap-4 border-t border-paper/10 py-7 text-xs text-paper/50 md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {company.name}
           {site.flags.demoNotice && <span> · Site de démonstration — marque et coordonnées fictives</span>}
@@ -87,6 +88,7 @@ export function Footer() {
             </Link>
           </li>
         </ul>
+      </div>
       </div>
     </footer>
   );

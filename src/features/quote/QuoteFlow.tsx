@@ -10,7 +10,9 @@ import { Logo } from "@/components/Logo";
 import { Arrow, Button } from "@/components/ui/Button";
 import { InventoryPicker } from "@/features/inventory/InventoryPicker";
 import { VolumeCounter } from "@/features/inventory/VolumeVisual";
-import { hasSpecialItem, totalVolume } from "@/features/inventory/volume";
+import { hasSpecialItem, suggestVehicle, totalVolume } from "@/features/inventory/volume";
+import { IsoCargo } from "@/features/inventory/IsoCargo";
+import { filledCells } from "@/features/inventory/cargo";
 import { leadRepository, makeReference, type Lead } from "@/features/admin/leads";
 import { attribution, track } from "@/lib/analytics";
 import { cn } from "@/lib/format";
@@ -189,7 +191,10 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
 
               {showMobileVolume && (
                 <div className="sticky top-[4.25rem] z-20 -mx-[var(--spacing-gutter)] mt-6 flex items-center justify-between bg-ivory/90 px-[var(--spacing-gutter)] py-3 backdrop-blur lg:hidden">
-                  <span className="text-sm text-stone-600">Volume estimé</span>
+                  <span className="flex items-center gap-3 text-sm text-stone-600">
+                    <IsoCargo filled={filledCells(volume, suggestVehicle(volume))} className="h-9 w-16" />
+                    Volume estimé
+                  </span>
                   <VolumeCounter value={volume} className="font-display text-2xl [font-weight:400]" />
                 </div>
               )}
