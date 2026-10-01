@@ -126,6 +126,11 @@ Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
 
 ---
 
+### Fourgon du hero
+- Composant `src/components/HeroVan.tsx` : photo détourée (fond transparent) et marquage SAMYO vectoriel appliqué sur le flanc (`VanLivery`, calé sur une image de 1092 × 466 px de profil).
+- L'image est lue depuis `NEXT_PUBLIC_VAN_IMAGE` (ex. `/media/samyo-van.webp`). Sans cette variable, le fourgon n'apparaît pas.
+- L'aperçu de maquette (Shutterstock n° 2451028223, filigrané) est **exclu du dépôt**. Une fois la licence achetée : détourer le fichier HD (`rembg`, modèle `isnet-general-use`), le déposer dans `public/media/`, définir la variable, puis recaler `VanLivery` si le cadrage change.
+
 ## 8. Analytics
 
 `track(event, props)` dans `src/lib/analytics.ts`. Événements : `quote_started`, `origin_completed`, `destination_completed`, `inventory_started`, `inventory_completed`, `special_item_added`, `contact_completed`, `quote_submitted`, `cta_click`, `phone_click`, `callback_requested`.

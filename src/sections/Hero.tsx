@@ -2,6 +2,8 @@ import { Phone } from "lucide-react";
 import { company, telHref } from "@/config/company";
 import { site } from "@/config/site";
 import { MediaSlot } from "@/components/MediaSlot";
+import { HeroVan } from "@/components/HeroVan";
+import { media } from "@/config/media";
 import { Reveal } from "@/components/ui/Reveal";
 import { RouteForm } from "@/features/quote/RouteForm";
 
@@ -50,10 +52,13 @@ export function Hero() {
               sizes="(min-width: 1024px) 34rem, 100vw"
               className="aspect-[5/4] rounded-[var(--radius-lg)] shadow-[var(--shadow-float)] sm:aspect-[4/5] sm:[border-radius:999px_999px_var(--radius-lg)_var(--radius-lg)]"
             />
-            <figcaption className="mt-4 flex items-baseline justify-between gap-4 px-1 text-xs text-stone-600">
-              <span>Protection du mobilier avant chargement</span>
-              <span className="num hidden sm:inline">50°37′ N — 3°03′ E</span>
-            </figcaption>
+            <HeroVan className="absolute -bottom-[14%] -left-[2%] z-10 w-[90%] sm:-bottom-[12%] sm:-left-[26%] sm:w-[96%] lg:-left-[40%] lg:w-[100%]" />
+            {!media.van.poster && (
+              <figcaption className="mt-4 flex items-baseline justify-between gap-4 px-1 text-xs text-stone-600">
+                <span>Protection du mobilier avant chargement</span>
+                <span className="num hidden sm:inline">50°37′ N — 3°03′ E</span>
+              </figcaption>
+            )}
           </figure>
         </Reveal>
       </div>
