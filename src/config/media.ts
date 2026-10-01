@@ -40,7 +40,7 @@ export const media = {
     alt: "Fourgon de déménagement SAMYO",
     // Image fournie par le client comme libre de droits (source à documenter),
     // détourée. Remplaçable par une photo du véritable véhicule.
-    poster: process.env.NEXT_PUBLIC_VAN_IMAGE || "/media/samyo-van.webp",
+    poster: process.env.NEXT_PUBLIC_VAN_IMAGE || "/media/samyo-van-logo.webp",
     video: null,
     fallback: "street",
   },

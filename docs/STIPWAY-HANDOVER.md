@@ -127,9 +127,10 @@ Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
 ---
 
 ### Fourgon du hero
-- Composant `src/components/HeroVan.tsx` : image détourée `public/media/samyo-van.webp` (fond transparent), marquage SAMYO vectoriel incliné pour suivre la perspective du flanc (`VanLivery`), ombre au sol dans l'axe des roues.
-- Image fournie par le client comme libre de droits : **conserver la source et la licence** (usage commercial autorisé) avec les documents du projet.
-- Pour la remplacer (par exemple par une photo du vrai fourgon) : détourer (`rembg`, modèle `isnet-general-use`), déposer le fichier, définir `NEXT_PUBLIC_VAN_IMAGE` ou remplacer `samyo-van.webp`, puis recaler la matrice de `VanLivery`.
+- Image finale : `public/media/samyo-van-logo.webp`, générée par `python3 scripts/build-van.py` à partir de `creative/van/van-detoure.png` (fourgon détouré) et `creative/van/logo-flanc.png`. Le logo est déformé en perspective et fondu en mode « produit » sur le panneau gris du flanc. Pour recaler, modifier `QUAD` (les 4 coins de la zone) dans le script.
+- `src/components/HeroVan.tsx` affiche l'image en grand devant l'arche, avec l'ombre au sol dans l'axe des roues et une entrée douce depuis la droite.
+- Image fournie par le client comme libre de droits : **conserver la source et la licence** (usage commercial autorisé).
+- Pour utiliser une autre photo (par exemple le vrai fourgon) : la détourer (`rembg`, modèle `isnet-general-use`), remplacer `creative/van/van-detoure.png`, ajuster `QUAD`, relancer le script. Changer le nom du fichier de sortie évite les problèmes de cache.
 
 ## 8. Analytics
 

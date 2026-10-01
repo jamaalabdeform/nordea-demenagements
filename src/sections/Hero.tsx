@@ -52,7 +52,7 @@ export function Hero() {
               sizes="(min-width: 1024px) 34rem, 100vw"
               className="aspect-[5/4] rounded-[var(--radius-lg)] shadow-[var(--shadow-float)] sm:aspect-[4/5] sm:[border-radius:999px_999px_var(--radius-lg)_var(--radius-lg)]"
             />
-            <HeroVan className="absolute -bottom-[16%] -left-[2%] z-10 w-[88%] sm:-bottom-[14%] sm:-left-[24%] sm:w-[92%] lg:-left-[36%] lg:w-[94%]" />
+            <HeroVan className="absolute -bottom-[16%] left-[8%] z-10 w-[92%] sm:-bottom-[14%] sm:-left-[8%] sm:w-[94%] lg:-left-[16%] lg:w-[96%]" />
             {!media.van.poster && (
               <figcaption className="mt-4 flex items-baseline justify-between gap-4 px-1 text-xs text-stone-600">
                 <span>Protection du mobilier avant chargement</span>
