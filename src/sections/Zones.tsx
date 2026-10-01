@@ -24,7 +24,7 @@ export function Zones() {
                   {l.published ? (
                     <Link href={routes.city(l.slug)} className="group flex items-center justify-between py-3.5 font-medium text-ink">
                       {l.name}
-                      <ArrowUpRight className="size-4 text-stone-500 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-forest-700" strokeWidth={1.6} aria-hidden />
+                      <ArrowUpRight className="size-4 text-stone-500 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-marine-700" strokeWidth={1.6} aria-hidden />
                     </Link>
                   ) : (
                     <span className="flex py-3.5 text-ink-2">{l.name}</span>
@@ -48,15 +48,15 @@ export function Zones() {
 function RegionMap() {
   const lille = locations.find((l) => l.slug === "lille")!;
   return (
-    <figure className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-xl)] bg-forest-900">
+    <figure className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-xl)] bg-marine-900">
       <svg viewBox="0 0 100 100" className="absolute inset-0 size-full" role="img" aria-label="Carte des villes desservies autour de Lille">
         <defs>
           <pattern id="dots" width="4" height="4" patternUnits="userSpaceOnUse">
             <circle cx="2" cy="2" r="0.35" fill="rgba(251,249,244,.13)" />
           </pattern>
           <radialGradient id="glow">
-            <stop offset="0" stopColor="rgba(207,122,85,.35)" />
-            <stop offset="1" stopColor="rgba(207,122,85,0)" />
+            <stop offset="0" stopColor="rgba(67,191,180,.35)" />
+            <stop offset="1" stopColor="rgba(67,191,180,0)" />
           </radialGradient>
         </defs>
         <rect width="100" height="100" fill="url(#dots)" />
@@ -73,8 +73,8 @@ function RegionMap() {
           const main = l.slug === "lille";
           return (
             <g key={l.slug}>
-              <circle cx={l.map.x} cy={l.map.y} r={main ? 1.6 : 0.9} fill={main ? "#cf7a55" : "rgba(251,249,244,.85)"} />
-              {main && <circle cx={l.map.x} cy={l.map.y} r="3.4" fill="none" stroke="#cf7a55" strokeWidth="0.3" opacity=".6" />}
+              <circle cx={l.map.x} cy={l.map.y} r={main ? 1.6 : 0.9} fill={main ? "#43bfb4" : "rgba(251,249,244,.85)"} />
+              {main && <circle cx={l.map.x} cy={l.map.y} r="3.4" fill="none" stroke="#43bfb4" strokeWidth="0.3" opacity=".6" />}
               <text
                 x={l.map.x > 70 ? l.map.x - 2 : l.map.x + (main ? 3.2 : 2)}
                 y={l.map.y + 1}

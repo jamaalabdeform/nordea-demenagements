@@ -24,7 +24,7 @@ export interface StepDef {
 export const GROUPS = ["Projet", "Inventaire", "Accès", "Date & options", "Envoi"] as const;
 
 export const STEPS: StepDef[] = [
-  { id: "trajet", group: 0, title: "Où déménagez-vous ?", subtitle: "Une ville suffit pour commencer. L'adresse exacte viendra plus tard." },
+  { id: "trajet", group: 0, title: "De quoi avez-vous besoin ?", subtitle: "Une ville suffit pour commencer. L'adresse exacte viendra plus tard." },
   { id: "logement", group: 0, title: "Quel est votre logement actuel ?", subtitle: "Cela nous aide à vous proposer un point de départ réaliste." },
   { id: "pieces", group: 0, title: "Quelles pièces déménagez-vous ?", subtitle: "Cochez les pièces dont vous emportez le contenu." },
   { id: "inventaire", group: 1, title: "Qu'emportez-vous ?", subtitle: "Ajoutez vos meubles pièce par pièce. Le volume se met à jour à chaque ajout." },
@@ -37,7 +37,15 @@ export const STEPS: StepDef[] = [
   { id: "recap", group: 4, title: "Vérifiez votre demande" },
 ];
 
-export const stepIndex = (id: StepId) => STEPS.findIndex((s) => s.id === id);
+/** Étapes actives : une demande de transport saute le logement et les pièces */
+export function activeSteps(d: Pick<QuoteDraft, "kind">): StepDef[] {
+  if (d.kind !== "transport") return STEPS;
+  return STEPS.filter((s) => s.id !== "logement" && s.id !== "pieces").map((s) =>
+    s.id === "inventaire" ? { ...s, title: "Que faut-il transporter ?", subtitle: "Ajoutez les objets un par un. Le volume se met à jour à chaque ajout." } : s,
+  );
+}
+
+export const stepIndex = (id: StepId, steps: StepDef[] = STEPS) => steps.findIndex((s) => s.id === id);
 
 function accessMissing(a: QuoteDraft["origin"]): string | null {
   const missing: string[] = [];

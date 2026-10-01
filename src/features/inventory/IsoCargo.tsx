@@ -40,15 +40,15 @@ export function IsoCargo({ filled, tone = "light", className }: { filled: number
   const maxY = Math.max(...all.map((p) => p[1]), P(X, 0, Z)[1]) + 8;
 
   const dark = tone === "dark";
-  const line = dark ? "rgba(251,249,244,.35)" : "rgba(29,58,49,.45)";
-  const faint = dark ? "rgba(251,249,244,.06)" : "rgba(29,58,49,.05)";
+  const line = dark ? "rgba(251,249,244,.35)" : "rgba(23,70,127,.45)";
+  const faint = dark ? "rgba(251,249,244,.06)" : "rgba(23,70,127,.05)";
 
   return (
     <svg viewBox={`${minX} ${minY} ${maxX - minX} ${maxY - minY}`} className={className} aria-hidden>
       {/* parois du fond */}
       <polygon points={pts(floor)} fill={faint} stroke={line} strokeWidth={0.6} />
       <polygon points={pts(backWall)} fill={faint} stroke={line} strokeWidth={0.6} />
-      <polygon points={pts(cabWall)} fill={dark ? "rgba(251,249,244,.1)" : "rgba(29,58,49,.09)"} stroke={line} strokeWidth={0.6} />
+      <polygon points={pts(cabWall)} fill={dark ? "rgba(251,249,244,.1)" : "rgba(23,70,127,.09)"} stroke={line} strokeWidth={0.6} />
 
       {drawOrder.map((c) => {
         const on = c.order < filled;

@@ -26,7 +26,7 @@ export function StepSpeciaux({ draft, update }: Props) {
               key={s.id}
               className={cn(
                 "rounded-[var(--radius-md)] bg-paper p-4 pl-5 transition-shadow duration-200",
-                qty ? "shadow-[0_0_0_1.5px_var(--color-brick-600)]" : "shadow-[var(--shadow-hairline)]",
+                qty ? "shadow-[0_0_0_1.5px_var(--color-alert-600)]" : "shadow-[var(--shadow-hairline)]",
               )}
             >
               <div className="flex items-center gap-3">
@@ -54,7 +54,7 @@ export function StepSpeciaux({ draft, update }: Props) {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: duration.base, ease: ease.out }}
-                    className="overflow-hidden text-xs font-medium text-brick-600"
+                    className="overflow-hidden text-xs font-medium text-alert-600"
                   >
                     <span className="flex items-center gap-1.5 pt-3">
                       <AlertCircle className="size-3.5" strokeWidth={2} aria-hidden />
@@ -68,7 +68,7 @@ export function StepSpeciaux({ draft, update }: Props) {
         })}
       </ul>
 
-      <p className={cn("mt-6 flex gap-3 rounded-[var(--radius-md)] p-4 text-sm", any ? "bg-brick-100/70 text-ink" : "bg-stone-100 text-stone-600")}>
+      <p className={cn("mt-6 flex gap-3 rounded-[var(--radius-md)] p-4 text-sm", any ? "bg-alert-50 text-ink" : "bg-stone-100 text-stone-600")}>
         <Info className="mt-0.5 size-4 shrink-0" strokeWidth={1.8} aria-hidden />
         {any
           ? "Un conseiller vous contactera pour évaluer ces objets (poids, dimensions, accès) avant d'établir le devis."
@@ -208,7 +208,7 @@ function FloorPill({ active, onClick, children }: { active: boolean; onClick: ()
       onClick={onClick}
       className={cn(
         "num h-12 min-w-12 rounded-full px-4 text-[0.9375rem] transition-[background-color,color,box-shadow] duration-200 active:scale-95",
-        active ? "bg-forest-700 font-medium text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(26_28_27/0.25)]",
+        active ? "bg-marine-700 font-medium text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.25)]",
       )}
     >
       {children}
@@ -278,6 +278,7 @@ export function StepDate({ draft, update }: Props) {
 export function StepOptions({ draft, update }: Props) {
   return (
     <div className="space-y-10">
+      {draft.kind !== "transport" && (
       <fieldset>
         <legend className="text-sm font-medium text-ink">Formule</legend>
         <div role="radiogroup" className="mt-3 grid gap-3 sm:grid-cols-3">
@@ -297,6 +298,7 @@ export function StepOptions({ draft, update }: Props) {
         </div>
         <p className="mt-3 text-xs text-stone-600">Pas encore décidé ? Laissez vide, le conseiller vous aidera à choisir.</p>
       </fieldset>
+      )}
 
       <fieldset>
         <legend className="text-sm font-medium text-ink">Services complémentaires</legend>
@@ -307,8 +309,8 @@ export function StepOptions({ draft, update }: Props) {
               <label
                 key={o.id}
                 className={cn(
-                  "flex cursor-pointer items-center gap-3 rounded-[var(--radius-md)] bg-paper p-4 transition-shadow duration-200 has-[:focus-visible]:shadow-[0_0_0_2px_var(--color-ivory),0_0_0_4px_var(--color-forest-500)]",
-                  on ? "shadow-[0_0_0_1.5px_var(--color-forest-700)]" : "shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(26_28_27/0.25)]",
+                  "flex cursor-pointer items-center gap-3 rounded-[var(--radius-md)] bg-paper p-4 transition-shadow duration-200 has-[:focus-visible]:shadow-[0_0_0_2px_var(--color-ivory),0_0_0_4px_var(--color-marine-500)]",
+                  on ? "shadow-[0_0_0_1.5px_var(--color-marine-700)]" : "shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.25)]",
                 )}
               >
                 <input
@@ -323,7 +325,7 @@ export function StepOptions({ draft, update }: Props) {
                 />
                 <span
                   aria-hidden
-                  className={cn("grid size-5 shrink-0 place-items-center rounded-[6px] transition-colors", on ? "bg-forest-700 text-paper" : "shadow-[inset_0_0_0_1.5px_rgb(26_28_27/0.25)]")}
+                  className={cn("grid size-5 shrink-0 place-items-center rounded-[6px] transition-colors", on ? "bg-marine-700 text-paper" : "shadow-[inset_0_0_0_1.5px_rgb(20_26_34/0.25)]")}
                 >
                   {on && (
                     <svg viewBox="0 0 12 12" className="size-3" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">

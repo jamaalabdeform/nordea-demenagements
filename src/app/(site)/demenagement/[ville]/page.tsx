@@ -61,7 +61,7 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
               </ol>
             </nav>
             <h1 className="font-display mt-8 text-5xl [font-weight:360]">
-              Déménager à {loc.name}, <em className="text-forest-700">sans improviser.</em>
+              Déménager à {loc.name}, <em className="text-marine-700">sans improviser.</em>
             </h1>
             <p className="mt-7 max-w-xl text-lg text-stone-600">{c.intro}</p>
             <RouteForm className="mt-10 max-w-[36rem]" />
@@ -93,7 +93,7 @@ export default async function CityPage({ params }: { params: Promise<{ ville: st
             <ul className="space-y-5">
               {c.access.map((a) => (
                 <li key={a} className="flex gap-4 text-[1.0625rem]">
-                  <Check className="mt-1 size-5 shrink-0 text-forest-500" strokeWidth={1.8} aria-hidden />
+                  <Check className="mt-1 size-5 shrink-0 text-marine-500" strokeWidth={1.8} aria-hidden />
                   {a}
                 </li>
               ))}

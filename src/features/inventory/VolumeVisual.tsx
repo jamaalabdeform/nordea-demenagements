@@ -98,7 +98,7 @@ export function FillGauge({ volume, vehicle, tone = "light" }: { volume: number;
     <div>
       <div className={cn("h-1 overflow-hidden rounded-full", tone === "dark" ? "bg-paper/15" : "bg-ink/8")}>
         <div
-          className="h-full rounded-full bg-brick-600 transition-[width] duration-700 ease-[var(--ease-out)]"
+          className="h-full rounded-full bg-lagon-600 transition-[width] duration-700 ease-[var(--ease-out)]"
           style={{ width: `${Math.max(ratio * 100, volume > 0 ? 2 : 0)}%` }}
         />
       </div>

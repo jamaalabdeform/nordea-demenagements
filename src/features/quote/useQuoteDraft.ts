@@ -2,14 +2,14 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { housingById, type HousingTypeId } from "@/data/furnitureCatalog";
-import { emptyDraft, type QuoteDraft } from "./types";
+import { emptyDraft, type QuoteDraft, type QuoteKind } from "./types";
 import type { StepId } from "./steps";
 
 /**
  * État du devis en cours. Persisté en sessionStorage : un rechargement ou un
  * retour arrière ne fait jamais perdre la saisie.
  */
-const KEY = "nordea:draft:v1";
+const KEY = "samyo:draft:v1";
 
 interface Stored {
   draft: QuoteDraft;
@@ -21,6 +21,7 @@ export interface InitialParams {
   to?: string;
   housing?: string;
   formula?: string;
+  kind?: string;
 }
 
 function load(params: InitialParams): Stored {
@@ -31,19 +32,33 @@ function load(params: InitialParams): Stored {
   } catch {
     /* noop */
   }
-  const draft = stored?.draft ?? emptyDraft();
+  const draft = { ...emptyDraft(), ...stored?.draft };
   let step: StepId = stored?.step ?? "trajet";
 
   // Les paramètres d'URL (hero, simulateur, formules) complètent la saisie
   if (params.from) draft.from.city = draft.origin.city = params.from;
   if (params.to) draft.to.city = draft.destination.city = params.to;
   if (params.formula && ["essentiel", "confort", "serenite"].includes(params.formula)) draft.formula = params.formula as QuoteDraft["formula"];
+  if (params.kind === "transport") applyKind(draft, "transport");
   if (params.housing && params.housing in housingById) {
     applyHousing(draft, params.housing as HousingTypeId);
   }
-  if (!stored && params.from && params.to) step = params.housing ? "pieces" : "logement";
+  if (!stored && params.from && params.to) step = draft.kind === "transport" ? "inventaire" : params.housing ? "pieces" : "logement";
   if (!stored && !params.from && params.housing) step = "trajet";
   return { draft, step };
+}
+
+/** Déménagement complet ou transport de quelques objets */
+export function applyKind(d: QuoteDraft, kind: QuoteKind) {
+  if (d.kind === kind) return;
+  d.kind = kind;
+  if (kind === "transport") {
+    d.rooms = [{ key: "transport-1", roomId: "transport", label: "Objets à transporter" }];
+    d.housing = null;
+    d.formula = null;
+  } else {
+    d.rooms = d.rooms.filter((r) => r.roomId !== "transport");
+  }
 }
 
 /** Choix du logement : pré-coche les pièces habituelles si rien n'a encore été saisi */
@@ -66,6 +81,7 @@ export function roomLabel(roomId: string) {
     garage: "Garage",
     cave: "Cave",
     exterieur: "Extérieur",
+    transport: "Objets à transporter",
   };
   return map[roomId] ?? roomId;
 }

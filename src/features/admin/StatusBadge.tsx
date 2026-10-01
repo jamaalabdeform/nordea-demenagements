@@ -2,12 +2,12 @@ import { cn } from "@/lib/format";
 import { statusLabel, type LeadStatus } from "./leads";
 
 const tone: Record<LeadStatus, string> = {
-  nouveau: "bg-brick-100 text-brick-600",
+  nouveau: "bg-lagon-100 text-lagon-600",
   "a-rappeler": "bg-[#f3ead0] text-[#7a5a12]",
   "devis-prepare": "bg-stone-100 text-ink-2",
-  "devis-envoye": "bg-forest-50 text-forest-700",
+  "devis-envoye": "bg-marine-50 text-marine-700",
   relance: "bg-[#f3ead0] text-[#7a5a12]",
-  accepte: "bg-forest-700 text-paper",
+  accepte: "bg-marine-700 text-paper",
   perdu: "bg-stone-100 text-stone-600 line-through decoration-stone-500/50",
 };
 

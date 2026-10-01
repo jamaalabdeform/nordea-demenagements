@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * Suffisant pour une démonstration — à remplacer par une vraie
  * authentification (NextAuth/Auth.js, Clerk, Supabase Auth…) en production.
  */
-const ADMIN_COOKIE = "nordea_admin";
+const ADMIN_COOKIE = "samyo_admin";
 
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;

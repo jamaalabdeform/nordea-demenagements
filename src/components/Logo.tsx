@@ -1,36 +1,47 @@
 import { company } from "@/config/company";
 import { cn } from "@/lib/format";
+import { DESCRIPTOR_PATH, LOGO_WIDTH, WORDMARK_PATH, WORDMARK_WIDTH } from "./logo-paths";
 
 /**
- * Marque provisoire NORDÉA : un cube isométrique ouvert — le volume, l'objet
- * qu'on protège, la boîte qu'on transporte. Le trait brique marque l'arête
- * « avant », comme un repère d'orientation.
- *
- * À remplacer par le logo du client : conserver le composant et son API
- * (`tone`, `compact`) pour ne rien toucher ailleurs.
+ * Logo SAMYO — le « S » est dessiné comme un trajet : départ (cercle ouvert)
+ * en bas à gauche, arrivée (pastille turquoise) en haut à droite.
+ * Lettrage vectorisé (scripts/build-logo.py) : rendu identique partout,
+ * sans dépendre du chargement des polices.
+ * Fichiers d'export : /public/brand/*.svg
  */
-export function LogoMark({ className }: { className?: string }) {
+export function LogoMark({ className, tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
+  const stroke = tone === "light" ? "var(--color-paper)" : "var(--color-marine-700)";
   return (
-    <svg viewBox="0 0 32 32" aria-hidden className={cn("size-8", className)} fill="none">
-      <path d="M16 3.5 27 9.75v12.5L16 28.5 5 22.25V9.75L16 3.5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M5 9.75 16 16l11-6.25" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M16 16v12.5" stroke="var(--color-brick-600)" strokeWidth="1.8" strokeLinecap="round" />
+    <svg viewBox="0 0 40 40" aria-hidden className={cn("size-8", className)} fill="none">
+      <SymbolPaths stroke={stroke} />
     </svg>
   );
 }
 
-export function Logo({ tone = "dark", compact = false, className }: { tone?: "dark" | "light"; compact?: boolean; className?: string }) {
+function SymbolPaths({ stroke }: { stroke: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", tone === "light" ? "text-paper" : "text-forest-900", className)}>
-      <LogoMark className="size-7" />
-      <span className="flex flex-col leading-none">
-        <span className="text-[1.0625rem] font-semibold tracking-[0.2em]">{company.wordmark}</span>
-        {!compact && (
-          <span className={cn("mt-1 text-[0.5625rem] font-medium uppercase tracking-[0.34em]", tone === "light" ? "text-paper/60" : "text-stone-600")}>
-            {company.descriptor}
-          </span>
-        )}
-      </span>
-    </span>
+    <>
+      <path d="M13.4 29.5H24a4.75 4.75 0 0 0 0-9.5h-8a4.75 4.75 0 0 1 0-9.5h10.4" stroke={stroke} strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="9.6" cy="29.5" r="2.35" stroke={stroke} strokeWidth="2" />
+      <circle cx="30.6" cy="10.5" r="3.1" fill="var(--color-lagon-400)" />
+    </>
+  );
+}
+
+export function Logo({ tone = "dark", compact = false, className }: { tone?: "dark" | "light"; compact?: boolean; className?: string }) {
+  const fg = tone === "light" ? "var(--color-paper)" : "var(--color-marine-700)";
+  const width = compact ? WORDMARK_WIDTH : LOGO_WIDTH;
+  return (
+    <svg
+      viewBox={`0 0 ${width} 40`}
+      role="img"
+      aria-label={`${company.wordmark} ${company.descriptor}`}
+      className={cn("h-10 w-auto", className)}
+      fill="none"
+    >
+      <SymbolPaths stroke={fg} />
+      <path d={WORDMARK_PATH} fill={fg} />
+      {!compact && <path d={DESCRIPTOR_PATH} fill={fg} fillOpacity={tone === "light" ? 0.6 : 0.68} />}
+    </svg>
   );
 }

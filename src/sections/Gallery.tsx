@@ -25,7 +25,7 @@ export function Gallery() {
             <Reveal as="article" key={f.id} delay={(i % 2) * 0.08} className={cn("flex flex-col", f.col)}>
               <MediaSlot id={f.id} sizes="(min-width: 1024px) 50vw, 100vw" className={cn("w-full rounded-[var(--radius-lg)]", f.media)} />
               <p className="mt-4 flex gap-4 text-sm">
-                <span className="eyebrow w-20 shrink-0 pt-[3px] text-brick-600">{f.label}</span>
+                <span className="eyebrow w-20 shrink-0 pt-[3px] text-lagon-600">{f.label}</span>
                 <span className="text-stone-600">{f.caption}</span>
               </p>
             </Reveal>

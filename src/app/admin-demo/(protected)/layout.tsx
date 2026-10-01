@@ -15,7 +15,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin-demo" aria-label="Tableau de bord">
               <Logo compact />
             </Link>
-            <span className="hidden rounded-full bg-forest-50 px-3 py-1 text-xs font-medium text-forest-700 sm:inline">Espace entreprise · démo</span>
+            <span className="hidden rounded-full bg-marine-50 px-3 py-1 text-xs font-medium text-marine-700 sm:inline">Espace entreprise · démo</span>
           </div>
           <nav className="flex items-center gap-1 text-sm">
             <Link href="/" className="inline-flex h-10 items-center gap-2 rounded-full px-3 text-ink-2 hover:bg-stone-100" target="_blank">

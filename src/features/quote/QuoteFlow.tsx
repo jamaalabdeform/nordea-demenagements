@@ -16,7 +16,7 @@ import { filledCells } from "@/features/inventory/cargo";
 import { leadRepository, makeReference, type Lead } from "@/features/admin/leads";
 import { attribution, track } from "@/lib/analytics";
 import { cn } from "@/lib/format";
-import { GROUPS, STEPS, stepIndex, validateStep, type StepId } from "./steps";
+import { GROUPS, activeSteps, stepIndex, validateStep, type StepDef, type StepId } from "./steps";
 import { useQuoteDraft, type InitialParams } from "./useQuoteDraft";
 import { StepLogement, StepPieces, StepTrajet } from "./steps/ProjectSteps";
 import { StepAccess, StepDate, StepOptions, StepSpeciaux } from "./steps/DetailSteps";
@@ -36,8 +36,9 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
   const topRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
-  const index = stepIndex(step);
-  const def = STEPS[index];
+  const steps = activeSteps(draft);
+  const index = Math.max(0, stepIndex(step, steps));
+  const def = steps[index];
   const volume = totalVolume(draft);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
   }, []);
 
   function move(to: StepId) {
-    setDir(stepIndex(to) > index ? 1 : -1);
+    setDir(stepIndex(to, steps) > index ? 1 : -1);
     setError(null);
     goTo(to);
     requestAnimationFrame(() => topRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }));
@@ -61,12 +62,12 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
     if (step === "inventaire") track("inventory_completed", { volume, rooms: draft.rooms.length });
     if (step === "depart") track("origin_completed", { city: draft.origin.city, floor: draft.origin.floor ?? "" });
     if (step === "arrivee") track("destination_completed", { city: draft.destination.city, floor: draft.destination.floor ?? "" });
-    const nextStep = STEPS[index + 1];
+    const nextStep = steps[index + 1];
     if (nextStep) move(nextStep.id);
   }
 
   function back() {
-    const prev = STEPS[index - 1];
+    const prev = steps[index - 1];
     if (prev) move(prev.id);
   }
 
@@ -167,14 +168,14 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
 
   return (
     <div className="min-h-dvh">
-      <FlowHeader index={index} />
+      <FlowHeader index={index} steps={steps} />
 
       <div ref={topRef} className="container-page scroll-mt-28 grid gap-10 pb-36 pt-8 sm:pt-12 lg:grid-cols-[minmax(0,1fr)_21rem] lg:pb-20 xl:grid-cols-[minmax(0,1fr)_23rem] xl:gap-20">
         <main id="contenu" className="min-w-0 max-w-[44rem]">
           <p className="eyebrow num text-stone-600">
-            <span className="text-brick-600">{String(index + 1).padStart(2, "0")}</span>
+            <span className="text-lagon-600">{String(index + 1).padStart(2, "0")}</span>
             <span className="mx-2 text-stone-500">/</span>
-            {String(STEPS.length).padStart(2, "0")} · {GROUPS[def.group]}
+            {String(steps.length).padStart(2, "0")} · {GROUPS[def.group]}
           </p>
 
           <AnimatePresence mode="wait" custom={dir} initial={false}>
@@ -225,7 +226,7 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="mt-6 rounded-[var(--radius-md)] bg-brick-100/70 px-4 py-3 text-sm font-medium text-brick-600"
+                className="mt-6 rounded-[var(--radius-md)] bg-danger-50 px-4 py-3 text-sm font-medium text-danger"
               >
                 {error}
               </motion.p>
@@ -274,9 +275,9 @@ export default function QuoteFlow({ params }: { params: InitialParams }) {
   );
 }
 
-function FlowHeader({ index }: { index: number }) {
-  const group = STEPS[index].group;
-  const progress = (index + 1) / STEPS.length;
+function FlowHeader({ index, steps }: { index: number; steps: StepDef[] }) {
+  const group = steps[index].group;
+  const progress = (index + 1) / steps.length;
   return (
     <header className="sticky top-0 z-30 bg-ivory/90 backdrop-blur-xl">
       <div className="container-page flex h-[4.25rem] items-center justify-between gap-6">
@@ -301,7 +302,7 @@ function FlowHeader({ index }: { index: number }) {
 
         <div className="flex items-center gap-1">
           <a href={telHref} className="hidden h-10 items-center gap-2 rounded-full px-3 text-sm text-ink-2 hover:bg-stone-100 lg:inline-flex">
-            <Phone className="size-4 text-forest-500" strokeWidth={1.6} aria-hidden />
+            <Phone className="size-4 text-marine-500" strokeWidth={1.6} aria-hidden />
             <span className="num">{company.phone.display}</span>
           </a>
           <Link href="/" className="grid size-10 place-items-center rounded-full text-ink-2 hover:bg-stone-100" aria-label="Quitter l'estimation">
@@ -310,7 +311,7 @@ function FlowHeader({ index }: { index: number }) {
         </div>
       </div>
       <div className="h-[2px] bg-ink/6" role="progressbar" aria-label="Avancement de la demande" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
-        <motion.div className="h-full origin-left bg-forest-700" initial={false} animate={{ scaleX: progress }} transition={{ duration: 0.6, ease: ease.out }} />
+        <motion.div className="h-full origin-left bg-marine-700" initial={false} animate={{ scaleX: progress }} transition={{ duration: 0.6, ease: ease.out }} />
       </div>
     </header>
   );

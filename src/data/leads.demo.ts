@@ -57,6 +57,7 @@ const labels: Record<RoomId, string> = {
   garage: "Garage",
   cave: "Cave",
   exterieur: "Extérieur",
+  transport: "Objets à transporter",
 };
 const labelOf = (id: RoomId) => labels[id];
 
@@ -90,10 +91,10 @@ function lead(id: string, ref: string, createdAt: string, status: LeadStatus, qu
 }
 
 export function demoLeads(): Lead[] {
-  return [
+  const leads = [
     lead(
       "demo-lead-1",
-      "ND-DEMO-0142",
+      "SM-DEMO-0142",
       daysAgo(0, 9),
       "nouveau",
       draftFrom({
@@ -112,7 +113,7 @@ export function demoLeads(): Lead[] {
     ),
     lead(
       "demo-lead-2",
-      "ND-DEMO-0139",
+      "SM-DEMO-0139",
       daysAgo(1, 16),
       "a-rappeler",
       draftFrom({
@@ -132,7 +133,7 @@ export function demoLeads(): Lead[] {
     ),
     lead(
       "demo-lead-3",
-      "ND-DEMO-0131",
+      "SM-DEMO-0131",
       daysAgo(3, 11),
       "devis-envoye",
       draftFrom({
@@ -156,7 +157,7 @@ export function demoLeads(): Lead[] {
     ),
     lead(
       "demo-lead-4",
-      "ND-DEMO-0127",
+      "SM-DEMO-0127",
       daysAgo(6, 10),
       "accepte",
       draftFrom({
@@ -177,7 +178,7 @@ export function demoLeads(): Lead[] {
     ),
     lead(
       "demo-lead-5",
-      "ND-DEMO-0118",
+      "SM-DEMO-0118",
       daysAgo(11, 15),
       "perdu",
       draftFrom({
@@ -193,4 +194,26 @@ export function demoLeads(): Lead[] {
       [{ at: daysAgo(9, 11), type: "status", text: "Statut : Perdu" }],
     ),
   ];
+  // Transport d'objets (sans déménagement complet)
+  const t = draftFrom({
+    from: "Roubaix",
+    to: "Lille",
+    housing: "autre",
+    origin: { floor: 0, carryDistance: "lt10", parking: "oui" },
+    destination: { address: "5 rue Gambetta", postalCode: "59000", floor: 2, elevator: "non", carryDistance: "10-30", parking: "nsp" },
+    date: inDays(9),
+    flexible: true,
+    contact: ["Yanis", "Haddad", "06 71 20 48 33"],
+    message: "Canapé et buffet achetés chez un particulier, à récupérer en rez-de-chaussée.",
+  });
+  t.kind = "transport";
+  t.housing = null;
+  t.rooms = [{ key: "transport-1", roomId: "transport", label: "Objets à transporter" }];
+  t.inventory = { "transport-1": { "t-canape": 1, "t-commode": 1, "t-chaise": 4 } };
+  leads.splice(1, 0, lead("demo-lead-6", "SM-DEMO-0144", daysAgo(0, 11), "nouveau", t));
+
+  // Suivi commercial d'exemple
+  leads[3].followUp = { amount: 3480, sentAt: daysAgo(2, 15) };
+  leads[4].followUp = { amount: 690, sentAt: daysAgo(5, 9), depositReceivedAt: daysAgo(4, 18) };
+  return leads;
 }

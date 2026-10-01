@@ -1,7 +1,7 @@
 {
-  "name": "nordea-demenagements",
+  "name": "samyo-demenagement",
   "version": "0.1.0",
-  "description": "Démo commerciale STIPway — site + simulateur de devis pour déménageur (marque fictive)",
+  "description": "SAMYO Déménagement & Transport — site, calculateur de volume et demande de devis",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

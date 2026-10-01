@@ -25,7 +25,7 @@ const stages = [
   {
     title: "Demande centralisée",
     text: "Toutes vos informations sont réunies dans un seul dossier, suivi par un seul interlocuteur.",
-    file: "Dossier ND-2611 · suivi par un conseiller",
+    file: "Dossier SM-2611 · suivi par un conseiller",
   },
   {
     title: "Validation avant devis",
@@ -78,9 +78,9 @@ export function Transparency() {
                   return (
                     <li key={s.title} className="flex items-center gap-3 text-sm">
                       <motion.span
-                        animate={{ backgroundColor: done ? "var(--color-forest-700)" : "rgba(0,0,0,0)", scale: done && !reduce ? [0.8, 1] : 1 }}
+                        animate={{ backgroundColor: done ? "var(--color-marine-700)" : "rgba(0,0,0,0)", scale: done && !reduce ? [0.8, 1] : 1 }}
                         transition={{ duration: 0.35 }}
-                        className={cn("grid size-5 shrink-0 place-items-center rounded-full", !done && "shadow-[inset_0_0_0_1px_rgb(26_28_27/0.2)]")}
+                        className={cn("grid size-5 shrink-0 place-items-center rounded-full", !done && "shadow-[inset_0_0_0_1px_rgb(20_26_34/0.2)]")}
                       >
                         {done && <Check className="size-3 text-paper" strokeWidth={2.5} />}
                       </motion.span>
@@ -107,7 +107,7 @@ export function Transparency() {
               <span
                 className={cn(
                   "num grid size-10 place-items-center rounded-full text-sm font-medium transition-colors duration-500",
-                  i <= reached ? "bg-forest-700 text-paper" : "bg-paper text-stone-600 shadow-[var(--shadow-hairline)]",
+                  i <= reached ? "bg-marine-700 text-paper" : "bg-paper text-stone-600 shadow-[var(--shadow-hairline)]",
                 )}
               >
                 {i + 1}

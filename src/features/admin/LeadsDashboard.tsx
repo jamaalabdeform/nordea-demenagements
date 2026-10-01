@@ -95,7 +95,7 @@ export function LeadsDashboard() {
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Nom, ville, référence…"
-                className="h-10 w-full rounded-full bg-paper pl-10 pr-4 text-sm shadow-[var(--shadow-hairline)] outline-none focus:shadow-[0_0_0_1.5px_var(--color-forest-500)]"
+                className="h-10 w-full rounded-full bg-paper pl-10 pr-4 text-sm shadow-[var(--shadow-hairline)] outline-none focus:shadow-[0_0_0_1.5px_var(--color-marine-500)]"
               />
             </div>
           </div>
@@ -142,7 +142,7 @@ export function LeadsDashboard() {
                       </div>
                       <p className="num mt-3 flex gap-3 text-xs text-stone-600">
                         <span>{l.volume ? `${formatNumber1(l.volume)} m³` : "Rappel"}</span>
-                        {l.specialItem && <span className="text-brick-600">Objet spécifique</span>}
+                        {l.specialItem && <span className="text-alert-600">Objet spécifique</span>}
                         <span className="ml-auto">{formatDateTime(l.createdAt)}</span>
                       </p>
                     </Link>
@@ -178,7 +178,7 @@ function Row({ lead: l }: { lead: Lead }) {
       <td className="px-3 py-4 text-ink-2">{route(l)}</td>
       <td className="num px-3 py-4 text-right">
         {l.volume ? `${formatNumber1(l.volume)} m³` : "—"}
-        {l.specialItem && <AlertCircle className="-mt-0.5 ml-1.5 inline size-3.5 text-brick-600" strokeWidth={2} aria-label="Objet spécifique" />}
+        {l.specialItem && <AlertCircle className="-mt-0.5 ml-1.5 inline size-3.5 text-alert-600" strokeWidth={2} aria-label="Objet spécifique" />}
       </td>
       <td className="px-3 py-4 text-ink-2">{l.quote.date.value ? formatDate(l.quote.date.value, { day: "numeric", month: "short" }) : l.quote.date.flexible ? "Flexible" : "—"}</td>
       <td className="px-3 py-4">
@@ -193,23 +193,24 @@ function Row({ lead: l }: { lead: Lead }) {
 }
 
 const name = (l: Lead) => [l.quote.contact.firstName, l.quote.contact.lastName].filter(Boolean).join(" ") || "Sans nom";
-const route = (l: Lead) => (l.quote.from.city ? `${l.quote.from.city} → ${l.quote.to.city}` : "Demande de rappel");
+const route = (l: Lead) =>
+  l.quote.from.city ? `${l.quote.from.city} → ${l.quote.to.city}${l.quote.kind === "transport" ? " · transport" : ""}` : "Demande de rappel";
 
 function Kpi({ label, value, accent, className }: { label: string; value: number | string; accent?: boolean; className?: string }) {
   return (
     <div className={cn("bg-paper px-5 py-5", className)}>
       <dt className="text-xs text-stone-600">{label}</dt>
-      <dd className={cn("font-display num mt-1 text-3xl", accent && "text-brick-600")}>{value}</dd>
+      <dd className={cn("font-display num mt-1 text-3xl", accent && "text-lagon-600")}>{value}</dd>
     </div>
   );
 }
 
 const subscribeFunnel = (cb: () => void) => {
   window.addEventListener("storage", cb);
-  window.addEventListener("nordea:leads-changed", cb);
+  window.addEventListener("samyo:leads-changed", cb);
   return () => {
     window.removeEventListener("storage", cb);
-    window.removeEventListener("nordea:leads-changed", cb);
+    window.removeEventListener("samyo:leads-changed", cb);
   };
 };
 let funnelCache: { raw: string; data: Record<string, number> } | null = null;
@@ -239,7 +240,7 @@ function Funnel() {
                 <span className="num font-medium">{v}</span>
               </div>
               <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-stone-100">
-                <div className={cn("h-full rounded-full", e === "special_item_added" ? "bg-brick-400" : "bg-forest-500")} style={{ width: `${Math.min(100, (v / max) * 100)}%` }} />
+                <div className={cn("h-full rounded-full", e === "special_item_added" ? "bg-lagon-400" : "bg-marine-500")} style={{ width: `${Math.min(100, (v / max) * 100)}%` }} />
               </div>
             </li>
           );

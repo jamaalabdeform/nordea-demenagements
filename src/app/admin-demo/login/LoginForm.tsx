@@ -10,7 +10,7 @@ import { login } from "../actions";
 export function LoginForm({ next }: { next: string }) {
   const [state, action, pending] = useActionState(login, undefined);
   return (
-    <main id="contenu" className="grid min-h-dvh place-items-center bg-forest-900 px-4">
+    <main id="contenu" className="grid min-h-dvh place-items-center bg-marine-900 px-4">
       <form action={action} className="w-full max-w-sm rounded-[var(--radius-lg)] bg-paper p-8 shadow-[var(--shadow-float)]">
         <Logo />
         <h1 className="font-display mt-8 text-3xl">Espace entreprise</h1>
@@ -24,7 +24,7 @@ export function LoginForm({ next }: { next: string }) {
         <Button type="submit" size="lg" className="mt-6 w-full" disabled={pending} arrow>
           Entrer
         </Button>
-        <p className="mt-6 text-center text-xs text-stone-500">Démo — code : nordea-demo</p>
+        <p className="mt-6 text-center text-xs text-stone-500">Démo — code : samyo-demo</p>
       </form>
     </main>
   );

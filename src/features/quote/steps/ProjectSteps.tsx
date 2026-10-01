@@ -7,13 +7,28 @@ import { citySuggestions } from "@/data/cities";
 import { ChoiceCard, QtyStepper, TextField } from "@/components/ui/form";
 import { cn } from "@/lib/format";
 import type { QuoteDraft } from "../types";
-import { applyHousing, roomLabel } from "../useQuoteDraft";
+import { applyHousing, applyKind, roomLabel } from "../useQuoteDraft";
 
 type Props = { draft: QuoteDraft; update: (fn: (d: QuoteDraft) => void) => void };
 
 export function StepTrajet({ draft, update }: Props) {
   const list = useId();
   return (
+    <div className="space-y-9">
+    <div role="radiogroup" aria-label="Votre besoin" className="grid gap-3 sm:grid-cols-2">
+      <ChoiceCard
+        selected={draft.kind === "demenagement"}
+        onClick={() => update((d) => applyKind(d, "demenagement"))}
+        title="Un déménagement"
+        detail="Tout ou partie d'un logement, d'un bureau"
+      />
+      <ChoiceCard
+        selected={draft.kind === "transport"}
+        onClick={() => update((d) => applyKind(d, "transport"))}
+        title="Un transport d'objets"
+        detail="Quelques meubles, un achat à récupérer, une livraison"
+      />
+    </div>
     <div className="grid gap-5 sm:grid-cols-[1fr_auto_1fr] sm:items-end">
       <TextField
         label="Ville de départ"
@@ -47,6 +62,7 @@ export function StepTrajet({ draft, update }: Props) {
           <option key={c} value={c} />
         ))}
       </datalist>
+    </div>
     </div>
   );
 }
@@ -99,7 +115,7 @@ export function StepPieces({ draft, update }: Props) {
               key={room.id}
               className={cn(
                 "col-span-2 flex items-center justify-between rounded-[var(--radius-md)] p-5 transition-[background-color,box-shadow] duration-200 sm:col-span-1 sm:flex-col sm:items-start sm:gap-3",
-                n ? "bg-paper shadow-[0_0_0_1.5px_var(--color-forest-700)]" : "bg-paper shadow-[var(--shadow-hairline)]",
+                n ? "bg-paper shadow-[0_0_0_1.5px_var(--color-marine-700)]" : "bg-paper shadow-[var(--shadow-hairline)]",
               )}
             >
               <div>

@@ -56,7 +56,7 @@ export interface Service {
   id: string;
   title: string;
   text: string;
-  icon: "home" | "briefcase" | "route" | "warehouse" | "gem" | "piano";
+  icon: "home" | "briefcase" | "route" | "warehouse" | "gem" | "piano" | "truck";
 }
 
 export const services: Service[] = [
@@ -73,6 +73,12 @@ export const services: Service[] = [
     icon: "briefcase",
   },
   {
+    id: "transport",
+    title: "Transport de mobilier",
+    text: "Un canapé acheté d'occasion, une armoire à livrer, quelques meubles à déplacer : pas besoin d'un déménagement complet.",
+    icon: "truck",
+  },
+  {
     id: "longue-distance",
     title: "Longue distance",
     text: "Depuis le Nord vers toute la France, avec un interlocuteur unique du départ à la livraison.",
@@ -85,15 +91,9 @@ export const services: Service[] = [
     icon: "warehouse",
   },
   {
-    id: "fragile",
-    title: "Mobilier fragile",
-    text: "Meubles anciens, verre, marbre : emballage adapté à chaque pièce, pas de solution unique.",
-    icon: "gem",
-  },
-  {
     id: "specifiques",
-    title: "Objets spécifiques",
-    text: "Piano, coffre-fort, billard, œuvres : chaque objet particulier fait l'objet d'une étude dédiée.",
+    title: "Objets fragiles & spécifiques",
+    text: "Piano, coffre-fort, mobilier ancien ou fragile : chaque objet particulier fait l'objet d'une étude dédiée.",
     icon: "piano",
   },
 ];

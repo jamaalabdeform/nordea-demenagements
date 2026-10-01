@@ -20,7 +20,8 @@ export type RoomId =
   | "salle-de-bain"
   | "garage"
   | "cave"
-  | "exterieur";
+  | "exterieur"
+  | "transport";
 
 export type HousingTypeId = "studio" | "t2" | "t3" | "t4" | "maison" | "autre";
 
@@ -194,6 +195,31 @@ export const rooms: Room[] = [
 ];
 
 /**
+ * Liste utilisée pour une demande de TRANSPORT (quelques objets, sans
+ * déménagement complet). Mêmes règles de volume que les pièces.
+ */
+export const transportRoom: Room = {
+  id: "transport",
+  label: "Objets à transporter",
+  items: [
+    { id: "t-canape", label: "Canapé", volume: 2 },
+    { id: "t-fauteuil", label: "Fauteuil", volume: 0.8 },
+    { id: "t-armoire", label: "Armoire", volume: 1.8 },
+    { id: "t-commode", label: "Commode / buffet", volume: 1 },
+    { id: "t-lit", label: "Lit (sommier + matelas)", volume: 1.6 },
+    { id: "t-matelas", label: "Matelas seul", volume: 0.5 },
+    { id: "t-table", label: "Table", volume: 1 },
+    { id: "t-chaise", label: "Chaise", volume: 0.3 },
+    { id: "t-frigo", label: "Réfrigérateur", volume: 1 },
+    { id: "t-lave-linge", label: "Lave-linge / sèche-linge", volume: 0.5 },
+    { id: "t-kit", label: "Meuble en kit (cartons plats)", volume: 0.3 },
+    { id: "t-velo", label: "Vélo", volume: 0.5 },
+    { id: "t-colis", label: "Colis volumineux", volume: 0.3 },
+    { id: "cartons", label: "Cartons", volume: CARTON_VOLUME, hint: "Carton standard ≈ 0,1 m³" },
+  ],
+};
+
+/**
  * Objets nécessitant une étude spécifique : leur sélection pose le drapeau
  * `specialItem = true` sur la demande.
  */
@@ -271,6 +297,6 @@ export type Vehicle = (typeof vehicles)[number];
 
 /* ───────────── Accès rapide ───────────── */
 
-export const roomById = Object.fromEntries(rooms.map((r) => [r.id, r])) as Record<RoomId, Room>;
+export const roomById = Object.fromEntries([...rooms, transportRoom].map((r) => [r.id, r])) as Record<RoomId, Room>;
 export const specialItemById = Object.fromEntries(specialItems.map((s) => [s.id, s])) as Record<string, SpecialItem>;
 export const housingById = Object.fromEntries(housingTypes.map((h) => [h.id, h])) as Record<HousingTypeId, HousingType>;

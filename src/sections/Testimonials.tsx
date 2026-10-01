@@ -24,7 +24,7 @@ export function Testimonials() {
           {testimonials.map((t, i) => (
             <Reveal as="li" key={t.id} delay={i * 0.07} className="flex flex-col rounded-[var(--radius-lg)] bg-ivory p-8 lg:p-10">
               <figure className="flex h-full flex-col">
-                <span aria-hidden className="font-display text-5xl leading-none text-brick-600">“</span>
+                <span aria-hidden className="font-display text-5xl leading-none text-lagon-600">“</span>
                 <blockquote className="font-display mt-2 text-xl leading-snug text-ink">{t.quote}</blockquote>
                 <figcaption className="mt-auto flex items-baseline justify-between gap-4 border-t border-ink/8 pt-6 text-sm">
                   <span className="font-semibold text-ink">{t.author}</span>

@@ -27,7 +27,7 @@ export function Formulas() {
               className={cn(
                 "relative flex flex-col rounded-[var(--radius-lg)] p-8 transition-shadow duration-500 lg:p-10",
                 f.featured
-                  ? "bg-forest-700 text-paper shadow-[var(--shadow-float)]"
+                  ? "bg-marine-700 text-paper shadow-[var(--shadow-float)]"
                   : "bg-paper shadow-[var(--shadow-hairline)] hover:shadow-[var(--shadow-lift)]",
               )}
             >
@@ -41,7 +41,7 @@ export function Formulas() {
               <ul className={cn("mt-8 space-y-3 border-t pt-8 text-[0.9375rem]", f.featured ? "border-paper/15" : "border-ink/8")}>
                 {f.includes.map((line) => (
                   <li key={line} className="flex gap-3">
-                    <Check className={cn("mt-1 size-4 shrink-0", f.featured ? "text-brick-400" : "text-forest-500")} strokeWidth={2} aria-hidden />
+                    <Check className={cn("mt-1 size-4 shrink-0", f.featured ? "text-lagon-400" : "text-marine-500")} strokeWidth={2} aria-hidden />
                     <span>{line}</span>
                   </li>
                 ))}

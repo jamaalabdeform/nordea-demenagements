@@ -33,7 +33,7 @@ declare global {
   }
 }
 
-const FUNNEL_KEY = "nordea:funnel";
+const FUNNEL_KEY = "samyo:funnel";
 
 const adapters: Adapter[] = [
   // Google Tag Manager / GA4 / Ads
@@ -63,7 +63,7 @@ const once = new Set<string>();
 export function track(event: AnalyticsEvent, props: EventProps = {}, opts: { oncePerSession?: boolean } = {}) {
   if (typeof window === "undefined") return;
   if (opts.oncePerSession) {
-    const key = `nordea:once:${event}`;
+    const key = `samyo:once:${event}`;
     try {
       if (once.has(key) || sessionStorage.getItem(key)) return;
       sessionStorage.setItem(key, "1");
@@ -91,7 +91,7 @@ export function readFunnel(): Record<string, number> {
 
 /* ───────────── Attribution marketing (UTM, gclid, fbclid) ───────────── */
 
-const ATTR_KEY = "nordea:attribution";
+const ATTR_KEY = "samyo:attribution";
 const ATTR_PARAMS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid"] as const;
 
 /** À appeler une fois au chargement : mémorise la source de la première visite de la session */

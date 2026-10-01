@@ -1,12 +1,12 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────────
- *  IDENTITÉ ENTREPRISE — DONNÉES DE DÉMONSTRATION (FICTIVES)
+ *  IDENTITÉ ENTREPRISE — SAMYO (coordonnées provisoires)
  * ─────────────────────────────────────────────────────────────────────────────
- *  NORDÉA DÉMÉNAGEMENTS est une marque fictive créée par STIPway pour une
- *  démonstration commerciale. Toutes les valeurs ci-dessous doivent être
- *  remplacées par les informations réelles du client (voir
- *  docs/CLIENT-INFO-NEEDED.md). Rien ici n'est un SIRET, un label, une
- *  certification ou une assurance réelle.
+ *  SAMYO Déménagement & Transport — maquette réalisée par STIPway.
+ *  Le nom et la marque sont ceux du client ; en revanche ADRESSE, TÉLÉPHONE,
+ *  HORAIRES et mentions légales sont des VALEURS PROVISOIRES à remplacer
+ *  par les informations réelles (voir docs/CLIENT-INFO-NEEDED.md).
+ *  Rien ici n'est un SIRET, un label, une certification ou une assurance réelle.
  *
  *  Ce fichier est la SEULE source de vérité pour l'identité : le header, le
  *  footer, le schema.org, les métadonnées et les pages légales le lisent.
@@ -16,17 +16,17 @@
 export const company = {
   isDemo: true,
 
-  name: "Nordéa Déménagements",
-  shortName: "Nordéa",
+  name: "Samyo Déménagement",
+  shortName: "Samyo",
   /** Graphie utilisée dans le logo */
-  wordmark: "NORDÉA",
-  descriptor: "Déménagements",
-  tagline: "Chaque chose à sa place.",
+  wordmark: "SAMYO",
+  descriptor: "Déménagement & Transport",
+  tagline: "De A à B, sans détour.",
   baseline:
-    "Déménageur basé à Lille. Particuliers et professionnels, dans le Nord et partout en France.",
+    "Déménagement et transport, basés à Lille. Particuliers et professionnels, dans le Nord et partout en France.",
 
   address: {
-    street: "28 rue des Ateliers",
+    street: "28 rue des Ateliers", // provisoire
     postalCode: "59000",
     city: "Lille",
     region: "Hauts-de-France",
@@ -37,10 +37,10 @@ export const company = {
   },
 
   phone: {
-    display: "03 20 84 27 61",
+    display: "03 20 84 27 61", // provisoire
     e164: "+33320842761",
   },
-  email: "contact@nordea-demenagements.fr",
+  email: "contact@samyo-demenagement.fr",
 
   hours: {
     display: "Du lundi au samedi, 8 h – 19 h",

@@ -2,15 +2,15 @@
  * Réglages transverses du site : URL, SEO par défaut, drapeaux de démo.
  */
 export const site = {
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.nordea-demenagements.fr").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.samyo-demenagement.fr").replace(/\/$/, ""),
   locale: "fr_FR",
   lang: "fr",
 
   seo: {
-    titleTemplate: "%s · Nordéa Déménagements",
-    defaultTitle: "Nordéa Déménagements — Déménageur à Lille et dans le Nord",
+    titleTemplate: "%s · Samyo Déménagement",
+    defaultTitle: "Samyo Déménagement & Transport — Lille, Nord et toute la France",
     description:
-      "Déménagement à Lille et dans le Nord, vers toute la France. Estimez votre volume en quelques minutes, recevez une proposition claire, vérifiée par un conseiller.",
+      "Déménagement et transport de mobilier à Lille, dans le Nord et vers toute la France. Calculez votre volume en quelques minutes et recevez un devis clair, vérifié par un conseiller.",
   },
 
   /** Libellés des CTA — centralisés pour tests A/B futurs */

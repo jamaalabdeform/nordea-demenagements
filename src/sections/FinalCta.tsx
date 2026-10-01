@@ -8,9 +8,9 @@ import { Reveal } from "@/components/ui/Reveal";
 export function FinalCta() {
   return (
     <section id="cta-final" aria-labelledby="cta-title" className="px-3 pb-3 sm:px-5 sm:pb-5">
-      <div className="relative overflow-hidden rounded-[var(--radius-xl)] bg-forest-900">
+      <div className="relative overflow-hidden rounded-[var(--radius-xl)] bg-marine-900">
         <MediaSlot id="arrival" sizes="100vw" className="absolute inset-0 opacity-30 mix-blend-luminosity" />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-900 via-forest-900/80 to-forest-900/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-marine-900 via-marine-900/80 to-marine-900/40" />
         <div className="container-page relative z-[2] py-28 text-center md:py-40">
           <Reveal>
             <h2 id="cta-title" className="font-display mx-auto max-w-3xl text-5xl text-paper [font-weight:340]">

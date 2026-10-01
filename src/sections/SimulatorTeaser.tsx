@@ -24,7 +24,7 @@ export function SimulatorTeaser() {
   const vehicle = suggestVehicle(hi);
 
   return (
-    <section id="simulateur" aria-labelledby="simulateur-title" className="grain overflow-hidden bg-forest-900 py-section text-paper">
+    <section id="simulateur" aria-labelledby="simulateur-title" className="grain overflow-hidden bg-marine-900 py-section text-paper">
       <div className="container-page relative z-[2] grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <SectionHeading
@@ -51,7 +51,7 @@ export function SimulatorTeaser() {
                       className={cn(
                         "h-11 rounded-full px-5 text-sm font-medium transition-[background-color,color,box-shadow] duration-300",
                         housing === t.id
-                          ? "bg-paper text-forest-900"
+                          ? "bg-paper text-marine-900"
                           : "text-paper/80 shadow-[inset_0_0_0_1px_rgb(251_249_244/0.22)] hover:text-paper hover:shadow-[inset_0_0_0_1px_rgb(251_249_244/0.5)]",
                       )}
                     >

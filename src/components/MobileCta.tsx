@@ -42,7 +42,7 @@ export function MobileCta() {
       )}
       aria-hidden={!visible}
     >
-      <div className="flex gap-2 rounded-full bg-forest-900/95 p-1.5 shadow-[var(--shadow-float)] backdrop-blur">
+      <div className="flex gap-2 rounded-full bg-marine-900/95 p-1.5 shadow-[var(--shadow-float)] backdrop-blur">
         <a
           href={telHref}
           tabIndex={visible ? 0 : -1}
@@ -56,7 +56,7 @@ export function MobileCta() {
           href={routes.quote}
           tabIndex={visible ? 0 : -1}
           onClick={() => track("cta_click", { location: "mobile_bar" })}
-          className="group/btn flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-paper text-[0.9375rem] font-medium text-forest-900 active:scale-[0.98]"
+          className="group/btn flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-paper text-[0.9375rem] font-medium text-marine-900 active:scale-[0.98]"
         >
           {site.cta.mobile}
           <Arrow />

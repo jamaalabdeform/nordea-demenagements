@@ -36,21 +36,15 @@ export interface LeadEvent {
 }
 
 /**
- * Devis chiffré et acompte. Le montant est saisi par le conseiller dans
- * l'admin (aucun prix n'est calculé automatiquement en mode démo).
+ * Suivi commercial du devis. Le montant est saisi par le conseiller ;
+ * l'encaissement se fait hors site (ex. lien SumUp envoyé au client).
  */
-export interface LeadPayment {
-  /** Montant total TTC du devis, en euros */
-  total: number;
-  depositPercent: number;
-  /** Acompte TTC à régler, en euros */
-  deposit: number;
-  status: "en-attente" | "paye";
-  method?: "carte" | "virement";
-  linkCreatedAt: string;
-  paidAt?: string;
-  /** Identifiant côté prestataire (Stripe Checkout Session…) */
-  providerRef?: string;
+export interface LeadQuoteFollowUp {
+  /** Montant TTC du devis envoyé, en euros */
+  amount: number;
+  sentAt: string;
+  /** Acompte encaissé hors site (SumUp, virement…) */
+  depositReceivedAt?: string;
 }
 
 export interface Lead {
@@ -67,7 +61,7 @@ export interface Lead {
   timeline: LeadEvent[];
   reviewReasons: string[];
   attribution?: Record<string, string>;
-  payment?: LeadPayment;
+  followUp?: LeadQuoteFollowUp;
 }
 
 export interface LeadRepository {
@@ -78,8 +72,8 @@ export interface LeadRepository {
   reset(): void;
 }
 
-const KEY = "nordea:leads";
-const CHANGE = "nordea:leads-changed";
+const KEY = "samyo:leads";
+const CHANGE = "samyo:leads-changed";
 
 class LocalLeadRepository implements LeadRepository {
   private read(): Lead[] | null {
@@ -128,7 +122,7 @@ class LocalLeadRepository implements LeadRepository {
   reset() {
     try {
       localStorage.removeItem(KEY);
-      localStorage.removeItem("nordea:funnel");
+      localStorage.removeItem("samyo:funnel");
       window.dispatchEvent(new Event(CHANGE));
     } catch {
       /* noop */
@@ -151,7 +145,7 @@ export function makeReference(date = new Date()) {
   const y = String(date.getFullYear()).slice(2);
   const m = String(date.getMonth() + 1).padStart(2, "0");
   const n = Math.floor(Math.random() * 9000 + 1000);
-  return `ND-${y}${m}-${n}`;
+  return `SM-${y}${m}-${n}`;
 }
 
 /* ───────────── Hook React : liste réactive des leads ───────────── */

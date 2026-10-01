@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-forest-900 text-paper">
+    <footer className="bg-marine-900 text-paper">
       <div className="container-page grid gap-14 pb-10 pt-20 md:grid-cols-12">
         <div className="md:col-span-4">
           <Logo tone="light" />
@@ -74,7 +74,7 @@ export function Footer() {
       <div className="flex flex-col gap-4 border-t border-paper/10 py-7 text-xs text-paper/50 md:flex-row md:items-center md:justify-between">
         <p>
           © {year} {company.name}
-          {site.flags.demoNotice && <span> · Site de démonstration — marque et coordonnées fictives</span>}
+          {site.flags.demoNotice && <span> · Maquette — coordonnées provisoires</span>}
         </p>
         <ul className="flex gap-6">
           <li>

@@ -35,10 +35,11 @@ export type ContactValues = z.infer<typeof contactSchema>;
 const qtyMap = z.record(z.string().max(60), z.number().int().min(0).max(999));
 
 export const quoteSchema = z.object({
+  kind: z.enum(["demenagement", "transport"]).default("demenagement"),
   from: z.object({ city: z.string().trim().min(1).max(100) }),
   to: z.object({ city: z.string().trim().min(1).max(100) }),
   housing: housing.nullable(),
-  rooms: z.array(z.object({ key: z.string().max(60), roomId: z.enum(["salon", "cuisine", "chambre", "bureau", "salle-a-manger", "salle-de-bain", "garage", "cave", "exterieur"]), label: z.string().max(60) })).max(40),
+  rooms: z.array(z.object({ key: z.string().max(60), roomId: z.enum(["salon", "cuisine", "chambre", "bureau", "salle-a-manger", "salle-de-bain", "garage", "cave", "exterieur", "transport"]), label: z.string().max(60) })).max(40),
   inventory: z.record(z.string().max(60), qtyMap),
   specials: qtyMap,
   origin: access,

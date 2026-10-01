@@ -9,7 +9,7 @@ export default function NotFound() {
       <Link href="/">
         <Logo />
       </Link>
-      <p className="eyebrow mt-14 text-brick-600">Page introuvable</p>
+      <p className="eyebrow mt-14 text-lagon-600">Page introuvable</p>
       <h1 className="font-display mt-4 text-4xl">Cette page a déménagé… ou n&apos;a jamais existé.</h1>
       <div className="mt-10 flex flex-col gap-3 sm:flex-row">
         <ButtonLink href="/" variant="secondary">

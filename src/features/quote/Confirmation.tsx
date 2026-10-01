@@ -39,7 +39,7 @@ export function Confirmation({
       </header>
 
       <main id="contenu" className="container-page flex flex-1 flex-col items-center justify-center pb-20 pt-8 text-center">
-        <motion.svg viewBox="0 0 64 64" className="size-16 text-forest-700" aria-hidden initial={false}>
+        <motion.svg viewBox="0 0 64 64" className="size-16 text-marine-700" aria-hidden initial={false}>
           <motion.circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" strokeWidth="1.5" initial={reduce ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.8, ease: ease.out }} />
           <motion.path d="M20 33l8 8 16-17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" initial={reduce ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.55, ease: ease.out }} />
         </motion.svg>
@@ -63,7 +63,7 @@ export function Confirmation({
           >
             {nextSteps.map((s, i) => (
               <li key={s.title} className="bg-paper p-6">
-                <span className="num text-sm font-medium text-brick-600">{String(i + 1).padStart(2, "0")}</span>
+                <span className="num text-sm font-medium text-lagon-600">{String(i + 1).padStart(2, "0")}</span>
                 <p className="mt-3 font-semibold">{s.title}</p>
                 <p className="mt-1 text-sm text-stone-600">{s.text}</p>
               </li>
@@ -76,7 +76,7 @@ export function Confirmation({
             Retour au site
           </ButtonLink>
           <a href={telHref} className="inline-flex h-12 items-center gap-2 rounded-full px-5 text-[0.9375rem] text-ink-2 hover:bg-stone-100">
-            <Phone className="size-4 text-forest-500" strokeWidth={1.6} aria-hidden />
+            <Phone className="size-4 text-marine-500" strokeWidth={1.6} aria-hidden />
             <span className="num">{company.phone.display}</span>
           </a>
         </div>

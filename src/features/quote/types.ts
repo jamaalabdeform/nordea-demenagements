@@ -25,7 +25,11 @@ export interface RoomInstance {
   label: string;
 }
 
+export type QuoteKind = "demenagement" | "transport";
+
 export interface QuoteDraft {
+  /** Déménagement complet, ou transport de quelques objets */
+  kind: QuoteKind;
   from: { city: string };
   to: { city: string };
   housing: HousingTypeId | null;
@@ -62,6 +66,7 @@ export const emptyAccess = (): Access => ({
 });
 
 export const emptyDraft = (): QuoteDraft => ({
+  kind: "demenagement",
   from: { city: "" },
   to: { city: "" },
   housing: null,

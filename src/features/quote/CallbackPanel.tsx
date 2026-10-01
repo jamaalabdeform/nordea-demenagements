@@ -116,7 +116,7 @@ export function CallbackPanel() {
             <FieldError message={formState.errors.consent?.message} />
           </div>
           {serverError && (
-            <p role="alert" className="rounded-[var(--radius-md)] bg-brick-100/70 px-4 py-3 text-sm font-medium text-brick-600">
+            <p role="alert" className="rounded-[var(--radius-md)] bg-danger-50 px-4 py-3 text-sm font-medium text-danger">
               {serverError}
             </p>
           )}

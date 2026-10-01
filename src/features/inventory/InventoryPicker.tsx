@@ -71,15 +71,15 @@ export function InventoryPicker({ draft, update }: Props) {
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-6 flex flex-col gap-4 rounded-[var(--radius-md)] bg-forest-50 p-5 sm:flex-row sm:items-center sm:justify-between"
+          className="mb-6 flex flex-col gap-4 rounded-[var(--radius-md)] bg-marine-50 p-5 sm:flex-row sm:items-center sm:justify-between"
         >
           <div className="flex gap-3">
-            <Sparkles className="mt-0.5 size-5 shrink-0 text-forest-500" strokeWidth={1.5} aria-hidden />
-            <p className="text-sm text-forest-900">
+            <Sparkles className="mt-0.5 size-5 shrink-0 text-marine-500" strokeWidth={1.5} aria-hidden />
+            <p className="text-sm text-marine-900">
               <span className="font-semibold">Pas le temps de tout lister ?</span> Partez d&apos;un inventaire type {housingById[draft.housing].label}, puis ajustez.
             </p>
           </div>
-          <button type="button" onClick={applyPreset} className="h-11 shrink-0 rounded-full bg-forest-700 px-5 text-sm font-medium text-paper transition-colors hover:bg-forest-900 active:scale-[0.98]">
+          <button type="button" onClick={applyPreset} className="h-11 shrink-0 rounded-full bg-marine-700 px-5 text-sm font-medium text-paper transition-colors hover:bg-marine-900 active:scale-[0.98]">
             Pré-remplir
           </button>
         </motion.div>
@@ -97,7 +97,7 @@ export function InventoryPicker({ draft, update }: Props) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Rechercher un meuble (armoire, vélo…)"
-          className="h-12 w-full rounded-full bg-paper pl-11 pr-11 text-[0.9375rem] shadow-[var(--shadow-hairline)] outline-none transition-shadow placeholder:text-stone-500 focus:shadow-[0_0_0_1.5px_var(--color-forest-500)] focus-visible:outline-none [&::-webkit-search-cancel-button]:hidden"
+          className="h-12 w-full rounded-full bg-paper pl-11 pr-11 text-[0.9375rem] shadow-[var(--shadow-hairline)] outline-none transition-shadow placeholder:text-stone-500 focus:shadow-[0_0_0_1.5px_var(--color-marine-500)] focus-visible:outline-none [&::-webkit-search-cancel-button]:hidden"
         />
         {query && (
           <button type="button" onClick={() => setQuery("")} className="absolute right-2 top-1/2 grid size-9 -translate-y-1/2 place-items-center rounded-full hover:bg-stone-100" aria-label="Effacer la recherche">
@@ -123,6 +123,7 @@ export function InventoryPicker({ draft, update }: Props) {
       ) : (
         <>
           {/* Onglets de pièces */}
+          {draft.rooms.length > 1 && (
           <div role="tablist" aria-label="Pièces" className="-mx-[var(--spacing-gutter)] mt-5 flex gap-2 overflow-x-auto px-[var(--spacing-gutter)] pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0">
             {draft.rooms.map((r) => {
               const vol = roomVolume(r.roomId, draft.inventory[r.key]);
@@ -136,7 +137,7 @@ export function InventoryPicker({ draft, update }: Props) {
                   onClick={() => setActiveKey(r.key)}
                   className={cn(
                     "flex h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm transition-[background-color,color,box-shadow] duration-200",
-                    selected ? "bg-ink text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(26_28_27/0.25)]",
+                    selected ? "bg-ink text-paper" : "bg-paper text-ink shadow-[var(--shadow-hairline)] hover:shadow-[0_0_0_1px_rgb(20_26_34/0.25)]",
                   )}
                 >
                   <span className="font-medium">{r.label}</span>
@@ -145,6 +146,7 @@ export function InventoryPicker({ draft, update }: Props) {
               );
             })}
           </div>
+          )}
 
           <AnimatePresence mode="wait" initial={false}>
             <motion.ul
@@ -175,7 +177,7 @@ export function InventoryPicker({ draft, update }: Props) {
 
 function ItemRow({ label, hint, volume, qty, onChange }: { label: string; hint?: string; volume: number; qty: number; onChange: (v: number) => void }) {
   return (
-    <li className={cn("flex items-center gap-4 py-3 pl-5 pr-3 transition-colors duration-300", qty > 0 && "bg-forest-50/60")}>
+    <li className={cn("flex items-center gap-4 py-3 pl-5 pr-3 transition-colors duration-300", qty > 0 && "bg-marine-50/60")}>
       <div className="min-w-0 flex-1">
         <p className="truncate text-[0.9375rem] font-medium text-ink">{label}</p>
         <p className="num mt-0.5 truncate text-xs text-stone-600">

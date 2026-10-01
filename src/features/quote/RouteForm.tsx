@@ -46,7 +46,7 @@ export function RouteForm({ className }: { className?: string }) {
       </datalist>
       <button
         type="submit"
-        className="group/btn mt-1.5 inline-flex h-14 items-center justify-center gap-2.5 rounded-full bg-forest-700 px-7 font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-forest-900 active:scale-[0.98] sm:mt-0"
+        className="group/btn mt-1.5 inline-flex h-14 items-center justify-center gap-2.5 rounded-full bg-marine-700 px-7 font-medium text-paper transition-[background-color,transform] duration-300 hover:bg-marine-900 active:scale-[0.98] sm:mt-0"
       >
         <span className="sm:hidden">{site.cta.primary}</span>
         <span className="hidden sm:inline">Continuer</span>
@@ -75,7 +75,7 @@ function CityField({
   return (
     <div
       className={cn(
-        "relative flex flex-col justify-center rounded-full px-5 py-2.5 transition-[background-color,box-shadow] focus-within:bg-stone-100/70 focus-within:shadow-[inset_0_0_0_1.5px_var(--color-forest-500)] sm:px-6",
+        "relative flex flex-col justify-center rounded-full px-5 py-2.5 transition-[background-color,box-shadow] focus-within:bg-stone-100/70 focus-within:shadow-[inset_0_0_0_1.5px_var(--color-marine-500)] sm:px-6",
         divider && "sm:before:absolute sm:before:inset-y-3 sm:before:left-0 sm:before:w-px sm:before:bg-ink/10",
       )}
     >

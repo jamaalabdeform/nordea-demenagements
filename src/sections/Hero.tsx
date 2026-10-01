@@ -12,14 +12,14 @@ export function Hero() {
         <div className="lg:col-span-6 lg:pr-6">
           <Reveal>
             <p className="eyebrow flex items-center gap-3 text-stone-600">
-              <span aria-hidden className="size-1.5 rounded-full bg-brick-600" />
-              Déménageur à Lille · Nord et toute la France
+              <span aria-hidden className="size-1.5 rounded-full bg-lagon-600" />
+              Déménagement & transport · Lille et toute la France
             </p>
           </Reveal>
 
           <Reveal delay={0.06}>
             <h1 id="hero-title" className="font-display mt-7 text-[clamp(2.75rem,1.6rem+2.9vw,4.25rem)] leading-[0.98] text-ink [font-weight:360]">
-              Un déménagement sans mauvaises <em className="text-forest-700 [font-weight:340]">surprises.</em>
+              Un déménagement sans mauvaises <em className="text-marine-700 [font-weight:340]">surprises.</em>
             </h1>
           </Reveal>
 
@@ -33,7 +33,7 @@ export function Hero() {
             <RouteForm />
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 pl-2 text-sm text-stone-600">
               <a href={telHref} className="group inline-flex items-center gap-2 font-medium text-ink underline-offset-4 hover:underline">
-                <Phone className="size-4 text-forest-500" strokeWidth={1.6} aria-hidden />
+                <Phone className="size-4 text-marine-500" strokeWidth={1.6} aria-hidden />
                 {site.cta.advisor}
               </a>
               <span aria-hidden className="hidden h-3 w-px bg-ink/15 sm:block" />

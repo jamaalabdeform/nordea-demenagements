@@ -35,7 +35,7 @@ export function HowItWorks() {
         <ol className="mt-16 grid gap-px overflow-hidden rounded-[var(--radius-lg)] bg-ink/8 shadow-[var(--shadow-hairline)] md:grid-cols-2 lg:mt-20 lg:grid-cols-4">
           {steps.map((s, i) => (
             <Reveal as="li" key={s.title} delay={i * 0.06} className="flex flex-col bg-paper p-7 lg:min-h-[19rem] lg:p-8">
-              <span className="font-display num text-[2.75rem] leading-none text-brick-600 [font-weight:300]">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-display num text-[2.75rem] leading-none text-lagon-600 [font-weight:300]">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-auto pt-12 text-lg font-semibold leading-snug text-ink">{s.title}</h3>
               <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-stone-600">{s.text}</p>
             </Reveal>

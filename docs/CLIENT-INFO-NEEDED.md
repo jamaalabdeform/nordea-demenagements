@@ -1,13 +1,13 @@
-# Informations à demander au déménageur
+# Informations à demander à SAMYO
 
-Checklist pour passer de la démo NORDÉA (marque fictive) au site réel. Chaque ligne indique **où** l'information sera branchée.
+Checklist pour passer de la maquette au site réel. Chaque ligne indique **où** l'information sera branchée.
 
 ## 1. Identité
-- [ ] Nom commercial, raison sociale, forme juridique → `src/config/company.ts`
-- [ ] Logo vectoriel (SVG/AI/PDF), variantes clair/foncé, pictogramme seul → `src/components/Logo.tsx`
+- [ ] Raison sociale, forme juridique (le nom commercial SAMYO est déjà intégré) → `src/config/company.ts`
+- [ ] Validation du logo proposé (`public/brand/`) ou fourniture d'un logo existant → `src/components/Logo.tsx`
 - [ ] Couleurs et typographies existantes, s'il y en a (sinon on conserve la direction proposée) → `src/app/globals.css` (`@theme`)
 - [ ] Signature / slogan, s'il en existe un
-- [ ] Nom de domaine et accès DNS
+- [ ] Nom de domaine retenu (voir `docs/DOMAINE-HEBERGEMENT.md`) et accès à l'espace OVH
 
 ## 2. Coordonnées
 - [ ] Adresse du siège et des éventuels dépôts
@@ -22,7 +22,8 @@ Checklist pour passer de la démo NORDÉA (marque fictive) au site réel. Chaque
 - [ ] Pour chaque ville à publier en SEO : quartiers, contraintes d'accès connues, délais d'autorisation de stationnement, références locales → `src/data/locations.ts`
 
 ## 4. Prestations
-- [ ] Liste des services réellement proposés (particuliers, pros, longue distance, garde-meubles, monte-meubles, nettoyage…) → `src/data/services.ts`
+- [ ] Liste des services réellement proposés (déménagement, transport de mobilier, longue distance, garde-meubles, monte-meubles, nettoyage…) → `src/data/services.ts`
+- [ ] Transport : objets les plus fréquents, distance ou volume minimum → `transportRoom` dans `src/data/furnitureCatalog.ts`
 - [ ] Services **non** proposés (pour ne rien promettre à tort)
 - [ ] Options facturables et leur description → `quoteOptions`
 
@@ -86,12 +87,11 @@ Checklist pour passer de la démo NORDÉA (marque fictive) au site réel. Chaque
 - [ ] Conditions générales de vente en vigueur (PDF)
 - [ ] Conditions d'annulation, de report, pénalités
 
-## 16. Paiement
-- [ ] Taux d'acompte (actuellement 30 % proposé par défaut, **à valider**) → `src/config/payment.config.ts`
-- [ ] Moyens acceptés : carte, virement, chèque, espèces, paiement en plusieurs fois
-- [ ] RIB (titulaire, IBAN, BIC) pour le virement
-- [ ] Compte Stripe (ou autre prestataire) : clés API, compte bancaire de versement
-- [ ] Moment du solde (jour J, livraison, après)
+## 16. Encaissement
+- [ ] Acompte demandé à la réservation ? Quel pourcentage ? (encaissé hors site, par ex. lien SumUp)
+- [ ] Moyens acceptés : SumUp (carte à distance), virement, chèque, espèces
+- [ ] Moment du solde (jour J, à la livraison, après)
+- [ ] À afficher éventuellement sur le site : « paiement par carte à distance accepté »
 
 ## 17. Process commercial
 - [ ] Qui traite les demandes, délai de rappel réaliste (ne sera affiché qu'une fois validé)

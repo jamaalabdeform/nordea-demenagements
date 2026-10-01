@@ -20,10 +20,10 @@ export function Recap({ draft, onEdit }: { draft: QuoteDraft; onEdit: (s: StepId
   return (
     <div className="overflow-hidden rounded-[var(--radius-lg)] bg-paper shadow-[var(--shadow-lift)]">
       {/* Bandeau trajet */}
-      <div className="grain bg-forest-900 px-6 py-8 text-paper sm:px-8">
+      <div className="grain bg-marine-900 px-6 py-8 text-paper sm:px-8">
         <div className="relative z-[2] flex flex-wrap items-center gap-x-4 gap-y-1">
           <span className="text-2xl font-semibold uppercase tracking-[0.08em] sm:text-3xl">{draft.from.city || "—"}</span>
-          <svg aria-hidden viewBox="0 0 40 12" className="h-3 w-10 text-brick-400" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg aria-hidden viewBox="0 0 40 12" className="h-3 w-10 text-lagon-400" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M0 6h37M32 1l5 5-5 5" />
           </svg>
           <span className="text-2xl font-semibold uppercase tracking-[0.08em] sm:text-3xl">{draft.to.city || "—"}</span>
@@ -34,7 +34,7 @@ export function Recap({ draft, onEdit }: { draft: QuoteDraft; onEdit: (s: StepId
             <span className="ml-1.5 text-lg text-paper/60">m³</span>
           </p>
           <p className="pb-1.5 text-sm text-paper/65">
-            {draft.housing ? housingById[draft.housing].label : ""} · {itemCount(draft) - specials} éléments
+            {draft.kind === "transport" ? "Transport d'objets" : draft.housing ? housingById[draft.housing].label : ""} · {itemCount(draft) - specials} éléments
             {draft.date.value && <> · {formatDate(draft.date.value, { day: "numeric", month: "long" })}</>}
             {draft.date.flexible && " (flexible)"}
           </p>
@@ -53,7 +53,7 @@ export function Recap({ draft, onEdit }: { draft: QuoteDraft; onEdit: (s: StepId
         </Row>
         <Row label="Objets particuliers" onEdit={() => onEdit("speciaux")}>
           {hasSpecialItem(draft.specials) ? (
-            <span className="text-brick-600">
+            <span className="text-alert-600">
               {Object.entries(draft.specials)
                 .filter(([, q]) => q > 0)
                 .map(([id, q]) => `${q > 1 ? `${q} × ` : ""}${specialItemById[id]?.label ?? id}`)

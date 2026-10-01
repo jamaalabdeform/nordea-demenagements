@@ -2,17 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft, Check, Copy, CreditCard, Mail, Phone, PhoneCall, TriangleAlert } from "lucide-react";
+import { ArrowLeft, Mail, Phone, PhoneCall, Receipt, TriangleAlert } from "lucide-react";
 import { housingById, roomById, specialItemById } from "@/data/furnitureCatalog";
 import { formulas, quoteOptions } from "@/data/services";
-import { paymentConfig } from "@/config/payment.config";
 import { roomVolume } from "@/features/inventory/volume";
 import { carryDistanceLabels, yesNoUnknownLabels, type Access } from "@/features/quote/types";
-import { formatEur } from "@/features/payment/format";
 import { reviewPoints } from "@/lib/pricing/engine";
 import { cn, formatDate, formatDateTime, formatFloor, formatNumber1 } from "@/lib/format";
 import { Button } from "@/components/ui/Button";
-import { inputClass } from "@/components/ui/form";
+import { Checkbox, inputClass } from "@/components/ui/form";
 import { LEAD_STATUSES, leadRepository, statusLabel, useLeads, type Lead, type LeadStatus } from "./leads";
 
 export function LeadDetail({ id }: { id: string }) {
@@ -63,7 +61,7 @@ function LeadView({ lead }: { lead: Lead }) {
             {q.from.city ? (
               <>
                 {q.from.city} → {q.to.city} · <span className="num">{formatNumber1(lead.volume)} m³</span>
-                {q.housing && ` · ${housingById[q.housing].label}`}
+                {q.kind === "transport" ? " · Transport d'objets" : q.housing && ` · ${housingById[q.housing].label}`}
               </>
             ) : (
               "Demande de rappel"
@@ -74,7 +72,7 @@ function LeadView({ lead }: { lead: Lead }) {
           {c.phone && (
             <a
               href={`tel:${c.phone.replace(/\s/g, "")}`}
-              className="inline-flex h-11 items-center gap-2 rounded-full bg-forest-700 px-5 text-sm font-medium text-paper hover:bg-forest-900"
+              className="inline-flex h-11 items-center gap-2 rounded-full bg-marine-700 px-5 text-sm font-medium text-paper hover:bg-marine-900"
               onClick={() => leadRepository.update(lead.id, {}, { type: "call", text: "Appel sortant" })}
             >
               <Phone className="size-4" strokeWidth={1.6} aria-hidden />
@@ -94,7 +92,7 @@ function LeadView({ lead }: { lead: Lead }) {
             id="status"
             value={lead.status}
             onChange={(e) => setStatus(e.target.value as LeadStatus)}
-            className="h-11 rounded-full bg-paper pl-4 pr-9 text-sm font-medium shadow-[var(--shadow-hairline)] outline-none focus:shadow-[0_0_0_1.5px_var(--color-forest-500)]"
+            className="h-11 rounded-full bg-paper pl-4 pr-9 text-sm font-medium shadow-[var(--shadow-hairline)] outline-none focus:shadow-[0_0_0_1.5px_var(--color-marine-500)]"
           >
             {LEAD_STATUSES.map((s) => (
               <option key={s.id} value={s.id}>
@@ -113,7 +111,7 @@ function LeadView({ lead }: { lead: Lead }) {
           return (
             <li key={s.id} className="min-w-28 flex-1">
               <button type="button" onClick={() => setStatus(s.id)} className="group w-full text-left" aria-current={lead.status === s.id ? "step" : undefined}>
-                <span className={cn("block h-1 rounded-full transition-colors", reached ? "bg-forest-700" : "bg-stone-200 group-hover:bg-stone-300")} />
+                <span className={cn("block h-1 rounded-full transition-colors", reached ? "bg-marine-700" : "bg-stone-200 group-hover:bg-stone-300")} />
                 <span className={cn("mt-2 block text-xs", lead.status === s.id ? "font-semibold text-ink" : "text-stone-600")}>{s.label}</span>
               </button>
             </li>
@@ -124,11 +122,11 @@ function LeadView({ lead }: { lead: Lead }) {
       <div className="mt-10 grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
         <div className="min-w-0 space-y-6">
           {points.length > 0 && (
-            <Card title="Points à vérifier avant devis" icon={<TriangleAlert className="size-4 text-brick-600" strokeWidth={1.8} />}>
+            <Card title="Points à vérifier avant devis" icon={<TriangleAlert className="size-4 text-alert-600" strokeWidth={1.8} />}>
               <ul className="grid gap-2 sm:grid-cols-2">
                 {points.map((p) => (
                   <li key={p} className="flex gap-2 text-sm text-ink-2">
-                    <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-brick-600" />
+                    <span aria-hidden className="mt-2 size-1.5 shrink-0 rounded-full bg-alert-600" />
                     {p}
                   </li>
                 ))}
@@ -179,8 +177,8 @@ function LeadView({ lead }: { lead: Lead }) {
                 })}
               </div>
               {lead.specialItem && (
-                <div className="mt-6 rounded-[var(--radius-md)] bg-brick-100/60 p-4 text-sm">
-                  <p className="font-semibold text-brick-600">Objets spécifiques · étude nécessaire</p>
+                <div className="mt-6 rounded-[var(--radius-md)] bg-alert-50/60 p-4 text-sm">
+                  <p className="font-semibold text-alert-600">Objets spécifiques · étude nécessaire</p>
                   <p className="mt-1 text-ink-2">
                     {Object.entries(q.specials)
                       .filter(([, n]) => n > 0)
@@ -200,7 +198,7 @@ function LeadView({ lead }: { lead: Lead }) {
         </div>
 
         <div className="space-y-6">
-          <PaymentCard lead={lead} />
+          <QuoteFollowUpCard lead={lead} />
           <Card title="Coordonnées">
             <dl className="space-y-3 text-sm">
               <Info label="Téléphone" value={c.phone || "—"} />
@@ -215,7 +213,7 @@ function LeadView({ lead }: { lead: Lead }) {
             <ol className="relative space-y-4 before:absolute before:bottom-2 before:left-[5px] before:top-2 before:w-px before:bg-ink/10">
               {[...lead.timeline].reverse().map((e, i) => (
                 <li key={i} className="relative pl-6 text-sm">
-                  <span aria-hidden className={cn("absolute left-0 top-1.5 size-[11px] rounded-full border-2 border-paper", e.type === "created" ? "bg-brick-600" : e.type === "call" ? "bg-forest-500" : "bg-stone-300")} />
+                  <span aria-hidden className={cn("absolute left-0 top-1.5 size-[11px] rounded-full border-2 border-paper", e.type === "created" ? "bg-lagon-600" : e.type === "call" ? "bg-marine-500" : "bg-stone-300")} />
                   <p className="text-ink-2">{e.text}</p>
                   <p className="num text-xs text-stone-500">{formatDateTime(e.at)}</p>
                 </li>
@@ -228,101 +226,65 @@ function LeadView({ lead }: { lead: Lead }) {
   );
 }
 
-/* ───────────────────────── Devis & acompte ───────────────────────── */
+/* ───────────────────────── Suivi du devis ───────────────────────── */
 
-function PaymentCard({ lead }: { lead: Lead }) {
-  const p = lead.payment;
-  const [total, setTotal] = useState(p ? String(p.total) : "");
-  const [percent, setPercent] = useState(String(p?.depositPercent ?? paymentConfig.defaultDepositPercent));
-  const [copied, setCopied] = useState(false);
-  const amount = Number(total.replace(",", "."));
-  const pct = Number(percent);
-  const valid = amount > 0 && pct > 0 && pct <= 100;
-  const deposit = valid ? Math.round(amount * pct) / 100 : 0;
-  const link = typeof window !== "undefined" ? `${window.location.origin}/paiement/${lead.id}` : `/paiement/${lead.id}`;
+const eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
 
-  function generate() {
+function QuoteFollowUpCard({ lead }: { lead: Lead }) {
+  const f = lead.followUp;
+  const [amount, setAmount] = useState(f ? String(f.amount) : "");
+  const value = Number(amount.replace(/\s/g, "").replace(",", "."));
+  const valid = value > 0;
+
+  function markSent() {
     if (!valid) return;
     leadRepository.update(
       lead.id,
-      {
-        status: lead.status === "accepte" ? lead.status : "devis-envoye",
-        payment: { total: amount, depositPercent: pct, deposit, status: "en-attente", linkCreatedAt: new Date().toISOString() },
-      },
-      { type: "status", text: `Devis envoyé (${formatEur(amount)}) — lien d'acompte de ${formatEur(deposit)} généré` },
+      { status: lead.status === "accepte" ? lead.status : "devis-envoye", followUp: { ...f, amount: value, sentAt: new Date().toISOString() } },
+      { type: "status", text: `Devis envoyé — ${eur.format(value)} TTC` },
     );
   }
 
-  async function copy() {
-    try {
-      await navigator.clipboard.writeText(link);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    } catch {
-      /* noop */
-    }
+  function toggleDeposit(received: boolean) {
+    if (!f) return;
+    leadRepository.update(
+      lead.id,
+      { status: received ? "accepte" : lead.status, followUp: { ...f, depositReceivedAt: received ? new Date().toISOString() : undefined } },
+      { type: "status", text: received ? "Acompte encaissé (hors site) — statut : Accepté" : "Acompte : encaissement annulé" },
+    );
   }
 
   return (
-    <Card title="Devis & acompte" icon={<CreditCard className="size-4 text-forest-500" strokeWidth={1.8} />}>
-      {p?.status === "paye" ? (
+    <Card title="Suivi du devis" icon={<Receipt className="size-4 text-marine-500" strokeWidth={1.8} />}>
+      <div className="space-y-4">
         <div>
-          <p className="flex items-center gap-2 text-sm font-semibold text-forest-700">
-            <span className="grid size-5 place-items-center rounded-full bg-forest-700 text-paper">
-              <Check className="size-3" strokeWidth={3} />
-            </span>
-            Acompte réglé
-          </p>
-          <dl className="mt-4 space-y-2 text-sm">
-            <Row2 label="Total devis" value={formatEur(p.total)} />
-            <Row2 label={`Acompte (${p.depositPercent} %)`} value={formatEur(p.deposit)} />
-            <Row2 label="Solde" value={formatEur(p.total - p.deposit)} />
-            <Row2 label="Payé le" value={p.paidAt ? formatDateTime(p.paidAt) : "—"} />
-          </dl>
-        </div>
-      ) : (
-        <div className="space-y-4">
-          <div className="grid grid-cols-[1fr_6rem] gap-3">
-            <div>
-              <label htmlFor="total" className="text-xs font-medium text-stone-600">
-                Montant du devis TTC (€)
-              </label>
-              <input id="total" inputMode="decimal" value={total} onChange={(e) => setTotal(e.target.value)} placeholder="1 850" className={cn(inputClass, "num mt-1.5 h-12")} />
-            </div>
-            <div>
-              <label htmlFor="pct" className="text-xs font-medium text-stone-600">
-                Acompte %
-              </label>
-              <input id="pct" inputMode="numeric" value={percent} onChange={(e) => setPercent(e.target.value.replace(/\D/g, ""))} className={cn(inputClass, "num mt-1.5 h-12")} />
-            </div>
+          <label htmlFor="amount" className="text-xs font-medium text-stone-600">
+            Montant du devis TTC (€)
+          </label>
+          <div className="mt-1.5 flex gap-2">
+            <input id="amount" inputMode="decimal" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="1 850" className={cn(inputClass, "num h-12")} />
+            <Button type="button" onClick={markSent} disabled={!valid} className="h-12 shrink-0 px-5">
+              {f ? "Mettre à jour" : "Marquer envoyé"}
+            </Button>
           </div>
-          {valid && (
-            <p className="text-sm text-ink-2">
-              Acompte à régler : <span className="num font-semibold">{formatEur(deposit)}</span>
-            </p>
-          )}
-          <Button type="button" onClick={generate} disabled={!valid} className="w-full">
-            {p ? "Mettre à jour le lien de paiement" : "Générer le lien de paiement"}
-          </Button>
-          {p && (
-            <div className="rounded-[var(--radius-md)] bg-stone-100 p-3">
-              <p className="text-xs text-stone-600">
-                Lien envoyé · acompte de <span className="num font-medium text-ink">{formatEur(p.deposit)}</span>
-                {p.method === "virement" && " · virement signalé par le client"}
-              </p>
-              <div className="mt-2 flex items-center gap-2">
-                <Link href={`/paiement/${lead.id}`} target="_blank" className="num min-w-0 flex-1 truncate text-xs font-medium text-forest-700 underline underline-offset-2">
-                  {link}
-                </Link>
-                <button type="button" onClick={copy} className="grid size-8 shrink-0 place-items-center rounded-full hover:bg-paper" aria-label="Copier le lien">
-                  {copied ? <Check className="size-3.5 text-forest-700" strokeWidth={2.5} /> : <Copy className="size-3.5" strokeWidth={1.8} />}
-                </button>
-              </div>
-            </div>
-          )}
-          <p className="text-xs text-stone-500">Montant saisi par le conseiller. Le calcul automatique sera activé avec la grille tarifaire du client.</p>
         </div>
-      )}
+        {f && (
+          <div className="rounded-[var(--radius-md)] bg-stone-100 p-4 text-sm">
+            <p className="text-ink-2">
+              Envoyé le {formatDateTime(f.sentAt)} · <span className="num font-semibold text-ink">{eur.format(f.amount)}</span>
+            </p>
+            <Checkbox checked={!!f.depositReceivedAt} onChange={toggleDeposit} className="mt-3">
+              <span className="text-sm">
+                Acompte encaissé
+                <span className="block text-xs text-stone-600">
+                  {f.depositReceivedAt ? `Le ${formatDateTime(f.depositReceivedAt)}` : "Réglé hors site (lien SumUp, virement…)"}
+                </span>
+              </span>
+            </Checkbox>
+          </div>
+        )}
+        <p className="text-xs text-stone-500">Le montant sera proposé automatiquement une fois la grille tarifaire de l&apos;entreprise intégrée.</p>
+      </div>
     </Card>
   );
 }
@@ -392,15 +354,6 @@ function Info({ label, value, extra }: { label: string; value: string; extra?: s
   );
 }
 
-function Row2({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex justify-between">
-      <dt className="text-stone-600">{label}</dt>
-      <dd className="num">{value}</dd>
-    </div>
-  );
-}
-
 function AccessBlock({ label, a, city }: { label: string; a: Access; city: string }) {
   const noLift = a.floor !== null && a.floor > 0 && a.elevator === "non";
   return (
@@ -415,12 +368,12 @@ function AccessBlock({ label, a, city }: { label: string; a: Access; city: strin
           {formatFloor(a.floor)}
         </li>
         {a.floor !== null && a.floor > 0 && (
-          <li className={cn(noLift && "font-medium text-brick-600")}>
+          <li className={cn(noLift && "font-medium text-alert-600")}>
             {a.elevator === "oui" ? `Ascenseur · adapté : ${a.elevatorFits ? yesNoUnknownLabels[a.elevatorFits].toLowerCase() : "?"}` : "Sans ascenseur"}
           </li>
         )}
         <li>Portage : {a.carryDistance ? carryDistanceLabels[a.carryDistance].toLowerCase() : "?"}</li>
-        <li className={cn(a.parking === "non" && "font-medium text-brick-600")}>Stationnement facile : {a.parking ? yesNoUnknownLabels[a.parking].toLowerCase() : "?"}</li>
+        <li className={cn(a.parking === "non" && "font-medium text-alert-600")}>Stationnement facile : {a.parking ? yesNoUnknownLabels[a.parking].toLowerCase() : "?"}</li>
       </ul>
     </div>
   );

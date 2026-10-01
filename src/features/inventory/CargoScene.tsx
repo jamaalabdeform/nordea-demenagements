@@ -73,12 +73,12 @@ function Container() {
   return (
     <group position={[0, SIZE.y / 2, 0]}>
       <lineSegments geometry={edges}>
-        <lineBasicMaterial color="#1d3a31" transparent opacity={0.45} />
+        <lineBasicMaterial color="#17467f" transparent opacity={0.45} />
       </lineSegments>
       {/* paroi côté cabine */}
       <mesh position={[-SIZE.x / 2 - 0.01, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
         <planeGeometry args={[SIZE.z, SIZE.y]} />
-        <meshStandardMaterial color="#d3e0da" transparent opacity={0.55} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#d4e3f2" transparent opacity={0.55} side={THREE.DoubleSide} />
       </mesh>
     </group>
   );

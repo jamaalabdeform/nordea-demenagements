@@ -26,9 +26,9 @@ export function Faq() {
           <div className="divide-y divide-ink/10 border-y border-ink/10">
             {faq.map((f) => (
               <details key={f.q} className="group">
-                <summary className="flex cursor-pointer items-start justify-between gap-6 rounded-sm py-6 text-left text-lg font-medium text-ink transition-colors hover:text-forest-700">
+                <summary className="flex cursor-pointer items-start justify-between gap-6 rounded-sm py-6 text-left text-lg font-medium text-ink transition-colors hover:text-marine-700">
                   <span>{f.q}</span>
-                  <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full shadow-[var(--shadow-hairline)] transition-[transform,background-color] duration-300 group-open:rotate-45 group-open:bg-forest-700 group-open:text-paper">
+                  <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full shadow-[var(--shadow-hairline)] transition-[transform,background-color] duration-300 group-open:rotate-45 group-open:bg-marine-700 group-open:text-paper">
                     <Plus className="size-3.5" strokeWidth={2} aria-hidden />
                   </span>
                 </summary>

@@ -28,7 +28,7 @@ const bodySchema = z.discriminatedUnion("kind", [
 
 function reference() {
   const d = new Date();
-  return `ND-${String(d.getFullYear()).slice(2)}${String(d.getMonth() + 1).padStart(2, "0")}-${Math.floor(Math.random() * 9000 + 1000)}`;
+  return `SM-${String(d.getFullYear()).slice(2)}${String(d.getMonth() + 1).padStart(2, "0")}-${Math.floor(Math.random() * 9000 + 1000)}`;
 }
 
 export async function POST(req: Request) {

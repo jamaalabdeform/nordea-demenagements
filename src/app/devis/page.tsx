@@ -16,7 +16,7 @@ export default async function DevisPage({ searchParams }: { searchParams: Search
   return (
     <QuoteEntry
       callback={one(sp.rappel) === "1"}
-      params={{ from: one(sp.de), to: one(sp.vers), housing: one(sp.logement), formula: one(sp.formule) }}
+      params={{ from: one(sp.de), to: one(sp.vers), housing: one(sp.logement), formula: one(sp.formule), kind: one(sp.besoin) }}
     />
   );
 }

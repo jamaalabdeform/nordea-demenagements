@@ -1,4 +1,4 @@
-# Higgsfield — prompts de production des assets NORDÉA
+# Higgsfield — prompts de production des assets SAMYO
 
 > Statut : **non générés.** Higgsfield est bien connecté à la session de développement, mais le compte n'avait plus de crédits (solde : 0). Tous les emplacements sont prêts dans le site, avec des compositions de repli.
 > Brancher un asset = déposer les fichiers dans `/public/media/` puis renseigner les chemins dans `src/config/media.ts`. Aucun autre fichier n'est à modifier.
@@ -7,7 +7,7 @@
 
 ```
 Photographic, shot on 35mm film look, natural window light, soft shadows, shallow depth of field,
-muted warm palette (ivory, stone grey, warm oak, deep green accents), French contemporary interior,
+natural palette (ivory, stone grey, warm oak, deep navy blue accents, a touch of soft turquoise), French contemporary interior,
 calm and methodical atmosphere, no text, no logos, no watermarks, no signage, no brand names,
 no smiling at camera, no thumbs up, no uniforms with printed text, realistic hands with five fingers,
 realistic proportions, no floating objects, no warped architecture.
@@ -34,7 +34,7 @@ realistic proportions, no floating objects, no warped architecture.
 Cinematic slow sequence inside a bright contemporary French apartment with tall windows, herringbone oak floor
 and white walls, morning light. Shot 1: close-up of two hands wrapping a walnut sideboard in a thick grey moving
 blanket, smoothing the fabric. Shot 2: hands closing a kraft cardboard box and running tape along the seam,
-tape dispenser sound implied. Shot 3: medium shot from behind of a mover in a plain dark green work jacket
+tape dispenser sound implied. Shot 3: medium shot from behind of a mover in a plain navy blue work jacket
 carrying a wrapped chair toward the door, unhurried. Shot 4: clean white moving truck interior, furniture neatly
 strapped against the wall. Shot 5: arrival in an empty sunlit apartment, a box gently set down on the floor.
 Very slow dolly and gentle handheld drift, 35mm, shallow depth of field, soft contrast, warm neutral grade.
@@ -58,7 +58,7 @@ Abstract minimal 3D motion, warm ivory background, soft studio light. Everyday o
 a stack of books, a vase) rendered in matte stone-grey clay material slowly fold and pack themselves into
 simple kraft cubes; the cubes glide and stack neatly into a translucent rectangular volume shaped like a
 truck cargo box; the volume slides gently to the right and dissolves into a sunlit empty room outline.
-Slow ease-in-out, elegant, architectural, no text, no logos, muted palette with one terracotta accent.
+Slow ease-in-out, elegant, architectural, no text, no logos, muted palette with one soft turquoise accent.
 ```
 
 ## ASSET 03 — Camion dans une rue du Nord
@@ -67,14 +67,14 @@ Slow ease-in-out, elegant, architectural, no text, no logos, muted palette with 
 - **Format :** image 4:3 + vidéo 6 s optionnelle
 
 ```
-Wide cinematic shot of a clean, plain white moving truck (no logo, no lettering, no graphics) parked along
+Wide cinematic shot of a clean, plain white or navy blue moving truck (no logo, no lettering, no graphics) parked along
 a quiet residential street in Lille, France: red-brick Flemish terraced houses with white window frames,
 cobblestone details, overcast soft daylight, a few potted plants by doorsteps. Rear door open, a ramp down,
 a mover seen from behind carrying a wrapped piece of furniture. Realistic scale, straight verticals,
 35mm, muted colors.
 ```
 
-> Le branding NORDÉA sur le camion sera ajouté **en compositing** (calque web ou retouche), jamais généré par l'IA.
+> Le branding SAMYO sur le camion sera ajouté **en compositing** (calque web ou retouche), jamais généré par l'IA.
 
 ## ASSET 04 — Protection des biens (macro)
 
