@@ -127,9 +127,9 @@ Détails de la charte : `docs/CHARTE-GRAPHIQUE.md`.
 ---
 
 ### Fourgon du hero
-- Composant `src/components/HeroVan.tsx` : photo détourée (fond transparent) et marquage SAMYO vectoriel appliqué sur le flanc (`VanLivery`, calé sur une image de 1092 × 466 px de profil).
-- L'image est lue depuis `NEXT_PUBLIC_VAN_IMAGE` (ex. `/media/samyo-van.webp`). Sans cette variable, le fourgon n'apparaît pas.
-- L'aperçu de maquette (Shutterstock n° 2451028223, filigrané) est **exclu du dépôt**. Une fois la licence achetée : détourer le fichier HD (`rembg`, modèle `isnet-general-use`), le déposer dans `public/media/`, définir la variable, puis recaler `VanLivery` si le cadrage change.
+- Composant `src/components/HeroVan.tsx` : image détourée `public/media/samyo-van.webp` (fond transparent), marquage SAMYO vectoriel incliné pour suivre la perspective du flanc (`VanLivery`), ombre au sol dans l'axe des roues.
+- Image fournie par le client comme libre de droits : **conserver la source et la licence** (usage commercial autorisé) avec les documents du projet.
+- Pour la remplacer (par exemple par une photo du vrai fourgon) : détourer (`rembg`, modèle `isnet-general-use`), déposer le fichier, définir `NEXT_PUBLIC_VAN_IMAGE` ou remplacer `samyo-van.webp`, puis recaler la matrice de `VanLivery`.
 
 ## 8. Analytics
 

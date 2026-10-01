@@ -7,5 +7,3 @@ next-env.d.ts
 .DS_Store
 .next-build
 
-# Aperçu Shutterstock filigrané (non licencié) : ne jamais versionner
-public/media/van-apercu-shutterstock.webp

@@ -38,9 +38,9 @@ export const media = {
     id: "van",
     brief: "Fourgon SAMYO détouré (photo du véritable véhicule, fond transparent PNG/WebP)",
     alt: "Fourgon de déménagement SAMYO",
-    // APERÇU LOCAL UNIQUEMENT — image Shutterstock n° 2451028223 non licenciée.
-    // Remplacer par le fichier HD sous licence avant toute mise en ligne.
-    poster: process.env.NEXT_PUBLIC_VAN_IMAGE ?? null,
+    // Image fournie par le client comme libre de droits (source à documenter),
+    // détourée. Remplaçable par une photo du véritable véhicule.
+    poster: process.env.NEXT_PUBLIC_VAN_IMAGE || "/media/samyo-van.webp",
     video: null,
     fallback: "street",
   },
